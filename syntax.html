@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../jquery-3.3.1.js"></script>
+    <script src="Scripts/syntax.css"></script>
+    <script src="Scripts/syntax.js"></script>
+    <script>
+        $(function(){
+            'use strict'
+            var syn = new Gus.ES6.ES6Obj();
+            let productId ;
+            syn.syntaxSample('body', productId);
+
+            var field = 'dynamicfield';
+            var price = 5.99;
+            var productView = {
+                [field + '001'] : price 
+            };
+            console.log(productView);
+            syn.showCategories(123,'search','advertising');
+            syn.spreadOpperator1();
+            syn.spreadOpperator2([12,20,18])
+            syn.spreadOpperator3([,,]);
+            syn.spreadOpperator4("43210");
+            syn.objectLiteral1();
+            syn.objectLiteral2();
+        
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
