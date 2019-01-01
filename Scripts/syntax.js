@@ -112,7 +112,7 @@
         
         showCategories = function showCategories(productId,...categories){
             console.log(categories instanceof Array);
-            $(DEFAULT).append(`<div>  <h3> REST opperator </h3> function showCategories(productId,...categories) \` $\{categories instanceof Array\}\` : ${categories instanceof Array}</div>`);
+            $(DEFAULT).append(`<div class="a">  <h3> REST opperator </h3> function showCategories(productId,...categories) \` $\{categories instanceof Array\}\` : ${categories instanceof Array}</div>`);
             
 
         },
@@ -120,49 +120,63 @@
             var prices=[12,20,18];
             var maxPrice=Math.max(...prices);
             console.log(maxPrice);
-            $(DEFAULT).append(`<div> <h2> Spread opperator </h2><h4> Example 1 </h4>
+            const newLocal = `<div class="a"> <h2> Spread opperator </h2><h4> Example 1 </h4>
+            <pre><code class="language-javascript">
             var prices=[12,20,18];
             var maxPrice=Math.max(...prices);
             console.log(maxPrice);
-            <b>maxPrice ${maxPrice}</div>`);
+            </code></pre>
+            <b>maxPrice ${maxPrice}</div>`;
+            $(DEFAULT).append(newLocal);
         },
         spreadOpperator2 = (prices) => {
-            $(DEFAULT).append(`<div> <h4> Example 2 </h4>      
-                varprices=[12,20,18];
-                varnewPriceArray=[...prices];
-                console.log(newPriceArray);
-                </div>`
-            );
+            const newLocal_1 = `<div class="a"> <h4> Example 2 </h4>
+            <pre><code class="language-javascript">      
+            varprices=[12,20,18];
+            varnewPriceArray=[...prices];
+            console.log(newPriceArray);
+            </code></pre>
+            </div>`;
+            $(DEFAULT).append(newLocal_1);
            for (var arr of [...prices]) {
                 $(DEFAULT).append(`<div> <b>Array Item : ${arr}</div>`) 
             }
         },
         spreadOpperator3 = (prices) => {
-            $(DEFAULT).append(`<div> <h4> Example 3 </h4>      
-                var newPriceArray=Array(...[,,]);
-                console.log(newPriceArray);
-                </div>`
-            );
+            const newLocal = `<div class="a"> <h4> Example 3 </h4>
+            <pre><code class="language-javascript">      
+            var newPriceArray=Array(...[,,]);
+            console.log(newPriceArray);
+            </code></pre>
+            </div>`;
+            $(DEFAULT).append(newLocal);
             var i = Array(...prices);
            for (var arr of Array(...prices)) {
                 $(DEFAULT).append(`<div> <b>Array Item : ${arr}</div>`) 
             }
         },
         spreadOpperator4 = (str) => {
-            $(DEFAULT).append(`<div> <h4> Example 4 </h4>    
-                var maxCode=Math.max(..."43210"); 
-                console.log(maxCode);
-                <b>Math.max(..."43210") : ${Math.max(...str)}</div>`
-            );
+            const newLocal_1 = `<div class="a"> <h4> Example 4 </h4>
+            <pre><code class="language-javascript">    
+            var maxCode=Math.max(..."43210"); 
+            console.log(maxCode);
+            </code></pre>
+            <b>Math.max(..."43210") : ${Math.max(...str)}</div>`;
+            $(DEFAULT).append(newLocal_1);
         },
         objectLiteral1 = () =>{
             var price=5.99,quantity=30; 
-            $(DEFAULT).append(`<div> <h2> Object Literals </h2><h4> Example 1 </h4>    
-            var price=5.99,quantity=30; 
-            var productView={price,quantity};
+            const newLocal = `<div class="a"> <h2> Object Literals </h2><h4> Example 1 </h4> 
+            <pre><code class="language-javascript">   
+            var price=5.99,
+                quantity=30; 
+            var productView = {
+                price,quantity
+            };
             console.log(productView);
-            <b>JSON.stringify({price,quantity}) : ${JSON.stringify({price,quantity})}</div>`
-            );
+            </code></pre>
+            <b>JSON.stringify({price,quantity}) : ${JSON.stringify({ price, quantity })}</div>`;
+            $(DEFAULT).append(newLocal);
         },
         objectLiteral2 = () =>{
             var price=5.99,quantity=10;
@@ -170,15 +184,224 @@
                 price,
                 quantity,
                 calculateValue(){
-                    return this.price*this.quantity
+                    return this.price * this.quantity
                 }
             };
             console.log(productView.calculateValue()); 
-            $(DEFAULT).append(`<div> <h4> Example 2 </h4>var price=5.99,quantity=10;var productView={price,quantity,calculateValue(){returnthis.price*this.quantity}};console.log(productView.calculateValue());
-            <b>productView.calculateValue()) : ${productView.calculateValue()}</div>`
-            );
+            const newLocal_1 = `<div class="a"> <h4> Example 2 </h4>
+            <pre><code class="language-javascript">
+            var price=5.99,
+                quantity=10;
+            var productView = {
+                price,
+                quantity,
+                calculateValue(){
+                    return this.price * this.quantity
+                }
+            };
+            console.log(productView.calculateValue());
+            </code></pre>
+            <b>productView.calculateValue()) : ${productView.calculateValue()}</div>`;
+            $(DEFAULT).append(newLocal_1);
+        }, 
+        objectLiteral3This = () =>{
+            var price=5.99,
+                quantity=10;
+            var productView={
+                price: 7.99,
+                quantity: 1,
+                calculateValue(){
+                    return this.price * this.quantity
+                }
+            };
+            console.log(productView.calculateValue());
+            const newLocal = `<div class="a"> <h4> Example 3 </h4>
+            <pre><code class="language-javascript">
+            var price=5.99,
+                quantity=10;
+            var productView = {
+                price: 7.99,
+                quantity: 1,
+                calculateValue() {
+                    return this.price * this.quantity
+                }
+            };
+            console.log(productView.calculateValue());
+            </code></pre>
+            <br><b>productView.calculateValue()) : ${productView.calculateValue()}</div>`;
+            $(DEFAULT).append(newLocal );
+        }, 
+        objectLiteral4 = () =>{
+            var method='doIt'; 
+            var productView={
+                [method+"-001"](){
+                    return "in a method";
+                }
+            };
+            productView['doIt-001']();
+            let newLocal = `<div class="a"> <h4> Example 4 </h4>
+            <pre><code class="language-javascript"> 
+            var method='doIt'; 
+            var productView = {
+                [method+"-001"](){retrun "in a method";}
+            };
+            productView['doIt-001']();
+            </code></pre>
+            <br><b>productView['doIt-001'](): ${productView['doIt-001']()}</div>`;
+            $(DEFAULT).append(newLocal);
+        }, 
+        objectLiteral5 = () =>{
+            var ident='productId';
+            var productView={
+                get[ident](){return true;},
+                set[ident](value){}
+            };
+            console.log(productView.productId);
+            let newLocal = `<div class="a"> <h4> Example 5 </h4>
+            <pre><code class="language-javascript"> 
+            var ident='productId';
+            var productView = {
+                get[ident](){return true;},
+                set[ident](value){}
+            };
+            console.log(productView.productId);
+            </code></pre>
+            <br><b>productView.productId: ${productView.productId}</div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        objectLiteral6 = () =>{
+            var price=5.99,quantity=10; 
+            var productView =
+            {
+                price,
+                quantity,
+                "calculatevalue"(){return this.price*this.quantity} 
+            };
+            console.log("calculatevalue :" + productView["calculatevalue"]());
+            const newLocal_1 = `<div class="a"> <h4> Example 6 </h4>
+            <pre><code class="language-javascript"> 
+            var price=5.99,quantity=10; 
+            var productView =
+            {
+                price,
+                quantity,
+                "calculatevalue"(){return this.price*this.quantity} 
+            };
+            console.log("calculatevalue :" + productView["calculatevalue"]());
+            </code></pre>
+            <br><b> productView["calculatevalue"](): ${productView["calculatevalue"]()}</div>`;
+            $(DEFAULT).append(newLocal_1);
+
+        },
+        objectLiteral7 = () =>{
+            var field='dynamicField';
+            var price=5.99;
+            var productView={
+                [field]:price
+            };
+            console.log("dynamicField: " + productView['dynamicField']);
+            let newLocal = `<div class="a"> <h4> Example 7 </h4>
+            <pre><code class="language-javascript"> 
+            var field='dynamicField';
+            var price=5.99;
+            var productView = {
+                [field]:price
+            };
+            console.log("dynamicField: " + productView['dynamicField']);
+            </code></pre>
+            <br><b> productView["dynamicField"]: ${productView["dynamicField"]}</div>`;
+            $(DEFAULT).append(newLocal);
+
+        },
+        objectLiteral8 = () =>{
+            var ident='productId';
+            var productView = {
+                blnState: true,
+                get[ident](){return this.blnState;},
+                set[ident](value){this.blnState = value;}
+                
+            };
+            console.log('productView.productId: ' + productView.productId);
+            productView.productId = false;
+            console.log('productView.productId: ' + productView.productId);
+            let temp = `<div class="a"> <h4> Example 8 </h4>
+            <pre><code class="language-javascript"> 
+            var ident='productId';
+            var productView = {
+                blnState: true,
+                get[ident](){return this.blnState;},
+                set[ident](value){this.blnState = value;}
+                
+            };
+            console.log('productView.productId: ' + productView.productId);
+            productView.productId = false;
+            console.log('productView.productId: ' + productView.productId);
+            </code></pre>
+            <br><b>productView.productId: ${!productView.productId}
+            <br><b>productView.productId: ${productView.productId}</div>`;
+            $(DEFAULT).append(temp);
+
+
+        }, 
+        destructor1 = () =>{
+            let salary = ['32000','50000','75000'];
+            let[ low, average, high] = salary;
+            console.log(average); 
+            const newLocal = `<div class="a"> <h2> Destructor </h2><h4> Example 1 </h4> 
+            <pre><code class="language-javascript">   
+            let salary = ['32000','50000','75000'];
+            let[ low, average, high] = salary;
+            console.log(average);
+            </code></pre>
+            <b>average : ${average}</div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        destructor2 = () => {
+            let salary = ['32000','50000'];
+            let [low,average,high] = salary;
+            console.log(high);
+            const newLocal = `<div class="a"><h4> Example 2 </h4> 
+            <pre><code class="language-javascript">   
+            let salary = ['32000','50000'];
+            let [low,average,high] = salary;
+            console.log(high)
+            </code></pre>
+            <b>high : ${high}</div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        destructor3 = () => {
+            let salary = ['32000','50000','75000'];
+            let [low,,high] = salary;
+            console.log(high); 
+            const newLocal = `<div class="a"><h4> Example 3 </h4> 
+            <pre><code class="language-javascript">   
+            let salary = ['32000','50000','75000'];
+            let [low,,high] = salary;
+            console.log(high);
+            </code></pre>
+            <b>high : ${high}</div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        destructor4 = () => {
+            let salary=['32000','50000','75000'];
+            let [low,...remaining] = salary;
+            console.log(remaining);
+            const newLocal = `<div class="a"><h4> Example 4 </h4> 
+            <pre><code class="language-javascript">   
+            let salary=['32000','50000','75000'];
+            let [low,...remaining] = salary;
+            console.log(remaining);
+            </code></pre>
+            </div>`;
+            $(DEFAULT).append(newLocal);
+            for (var arr of remaining) {
+                $(DEFAULT).append(`<div> <b>Array Item : ${arr}</div>`) 
+            }
         };
 
+       
+       
+        
         // Public methods
         return {
             syntaxSample :mySyntaxSample,
@@ -188,7 +411,17 @@
             spreadOpperator3,
             spreadOpperator4,
             objectLiteral1,
-            objectLiteral2
+            objectLiteral2,
+            objectLiteral3This,
+            objectLiteral4,
+            objectLiteral5,
+            objectLiteral6,
+            objectLiteral7,
+            objectLiteral8,
+            destructor1,
+            destructor2,
+            destructor3,
+            destructor4
         };
     };
 
