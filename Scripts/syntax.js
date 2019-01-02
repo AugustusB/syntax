@@ -397,11 +397,138 @@
             for (var arr of remaining) {
                 $(DEFAULT).append(`<div> <b>Array Item : ${arr}</div>`) 
             }
+        },
+        destructorDefault5 = () => {
+            let salary=['32000','50000'];
+            let[low,average,high='88000']=salary;
+            console.log(high);
+            const newLocal = `<div class="a"><h4> Example 5 </h4> 
+            <pre><code class="language-javascript">   
+            let salary=['32000','50000'];
+            let[low,average,high='88000']=salary;
+            console.log(high);
+            </code></pre>
+            <b>high : ${high}</div>`;
+            $(DEFAULT).append(newLocal);
+           
+        },
+        destructorNestedArrays6 = () => {
+            var salary = ['32000','50000',['88000','99000']];
+            var[low,average,[actualLow,actualHigh]] = salary;
+            console.log(actualLow);
+            const newLocal = `<div class="a"><h4> Example 6 </h4> 
+            <pre><code class="language-javascript">   
+            let salary = ['32000','50000',['88000','99000']];
+            let[low,average,[actualLow,actualHigh]] = salary;
+            console.log(actualLow);
+            </code></pre>
+            <b>actualLow : ${actualLow}</div>`;
+            $(DEFAULT).append(newLocal);
+           
+        },
+        destructorVariable7 = () => {
+            var salary = ['32000','50000'];
+            var low,average,high;
+            [low,average,high = '88000'] = salary;
+            console.log(high);
+            const newLocal = `<div class="a"><h4> Example 7 </h4> 
+            <pre><code class="language-javascript">   
+            var salary = ['32000','50000'];
+            var low,average,high;
+            [low,average,high = '88000'] = salary;
+            console.log(high);
+            </code></pre>
+            <b>high : ${high}</div>`;
+            $(DEFAULT).append(newLocal);
+           
+        },
+        destructorFrunctionPara8 = () => {
+            function reviewSalary([low,average],high='88000'){
+                console.log(average);
+                return average;
+            }
+            reviewSalary(['32000','50000']);
+            const newLocal = `<div class="a"><h4> Example 8 </h4> 
+            <pre><code class="language-javascript">   
+            function reviewSalary([low,average],high='88000'){
+                console.log(average);
+                return average;
+            }
+            reviewSalary(['32000','50000']);
+            </code></pre>
+            <b>reviewSalary(['32000','50000']); : ${reviewSalary(['32000','50000'])}</div>`;
+            $(DEFAULT).append(newLocal);
+           
+        },
+        destructorObject9 = () => {
+            var salary = {
+                low:'32000',
+                average:'50000',
+                high:'75000'
+            };
+            var{low,average,high} = salary;
+            console.log(high);
+            const newLocal = `<div class="a"><h4> Example 9 </h4> 
+            <pre><code class="language-javascript">   
+            var salary = {
+                low:'32000',
+                average:'50000',
+                high:'75000'
+            };
+            var{low,average,high} = salary;
+            console.log(high);
+            </code></pre>
+            <b>high : ${high}</div>`;
+            $(DEFAULT).append(newLocal);
+           
+        },
+        destructorObject10 = () => {
+            let salary = {
+                low:'32000',
+                average:'50000',
+                high:'75000'
+            }; 
+            let {low:newLow,average:newAverage,high:newHigh } = salary;
+            console.log(newHigh);  
+            const newLocal = `<div class="a"><h4> Example 10 </h4> 
+            <pre><code class="language-javascript">   
+            let salary = {
+                low:'32000',
+                average:'50000',
+                high:'75000'
+            }; 
+            let {low:newLow,average:newAverage,high:newHigh } = salary;
+            console.log(newHigh);    
+            </code></pre>
+            <b>newHigh : ${newHigh}</div>`;
+            $(DEFAULT).append(newLocal);
+           
+        },
+        destructorObject11 = () => {
+            var salary = {
+                low:'32000',
+                average:'50000',
+                high:'75000'
+            };
+            var newLow,newAverage,newHigh;
+            ({low:newLow,average:newAverage,high:newHigh} = salary);
+            console.log(newHigh); 
+            const newLocal = `<div class="a"><h4> Example 11 </h4> 
+            <pre><code class="language-javascript">   
+            var salary = {
+                low:'32000',
+                average:'50000',
+                high:'75000'
+            };
+            var newLow,newAverage,newHigh;
+            ({low:newLow,average:newAverage,high:newHigh} = salary);
+            console.log(newHigh);   
+            </code></pre>
+            <b>newHigh : ${newHigh}</div>`;
+            $(DEFAULT).append(newLocal);
+           
         };
 
-       
-       
-        
         // Public methods
         return {
             syntaxSample :mySyntaxSample,
@@ -421,7 +548,15 @@
             destructor1,
             destructor2,
             destructor3,
-            destructor4
+            destructor4,
+            destructorDefault5,
+            destructorNestedArrays6,
+            destructorVariable7,
+            destructorFrunctionPara8,
+            destructorObject9,
+            destructorObject10,
+            destructorObject11
+            
         };
     };
 
