@@ -669,8 +669,136 @@
             </code></pre>
             <b>new myClass() : constructingTask</div>`;
             $(DEFAULT).append(newLocal);
+        },
+        classesExtends5 = () =>{
+            class Project { 
+                constructor(name) {
+                    console.log('constructing Project:'+ name);
+                    this.name = 'constructing Project:'+ name;
+                }
+                getTaskCount() {
+                    return 50;
+                }
+            }
+            class SoftwareProject extends Project{
+                constructor(name, namesp) {
+                    super(name);
+                    console.log('constructing SoftwareProject');
+                    this.nameSP = 'constructing SoftwareProject:' + namesp;
+                }
+                getTaskCount() {
+                    return super.getTaskCount() + 6;
+                }
+            }
+            let p = new SoftwareProject('Mazatlan', 'MazatlanSP');
+            const newLocal = `<div class="a"><h4> Example 5 </h4> 
+            <pre><code class="language-javascript">   
+            class Project { 
+                constructor(name) {
+                    console.log('constructing Project:'+ name);
+                    this.name = 'constructing Project:'+ name;
+                }
+                getTaskCount() {
+                    return 50;
+                }
+            }
+            class SoftwareProject extends Project{
+                constructor(name, namesp) {
+                    super(name);
+                    console.log('constructing SoftwareProject');
+                    this.nameSP = 'constructing SoftwareProject:' + namesp;
+                }
+                getTaskCount() {
+                    return super.getTaskCount() + 6;
+                }
+            }
+            let p = new SoftwareProject('Mazatlan', 'MazatlanSP');
+            </code></pre>
+            <b>p.name : ${p.name} <br>p.nameSP : ${p.nameSP} <br>p.getTaskCount(): ${p.getTaskCount()} </div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        classesObjectLiteral6 = () =>{
+            
+            let project = {
+                getTaskCount(){
+                    return 50;
+                }
+            };
+            let softwareProject = {
+                getTaskCount() { 
+                    return super.getTaskCount() + 7;
+                }
+            }
+            Object.setPrototypeOf(softwareProject, project);
+            console.log(softwareProject.getTaskCount());
+            const newLocal = `<div class="a"><h4> Example 6 </h4> 
+            <pre><code class="language-javascript">   
+            let project = {
+                getTaskCount(){
+                    return 50;
+                }
+            };
+            let softwareProject = {
+                getTaskCount() { 
+                    return super.getTaskCount() + 7;
+                }
+            }
+            Object.setPrototypeOf(softwareProject, project);
+            console.log(softwareProject.getTaskCount());
+            </code></pre>
+            <b>softwareProject.getTaskCount() : ${softwareProject.getTaskCount()}</div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        classesStaticFunctions7 = () =>{
+            class Project{
+                static getDefaultId() {
+                    return 0;
+                }
+            }
+            Project.id=99;
+            console.log(Project.getDefaultId());
+            const newLocal = `<div class="a"><h4> Example 7 </h4> 
+            <pre><code class="language-javascript">   
+            class Project{
+                static getDefaultId() {
+                    return 0;
+                }
+            }
+            console.log(Project.getDefaultId());
+            </code></pre>
+            <b>Project.getDefaultId() : ${Project.getDefaultId()} <br>
+            Project.id : ${Project.id}</div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        classesTarget8 = () =>{
+            class Project {
+                constructor() { 
+                    console.log(new.target);
+                    this.strTarget = new.target;
+                }
+            }
+            class SoftwareProject extends Project {
+                constructor() {
+                    super();
+                }
+            }
+            var p = new Project();
+            var m = new SoftwareProject();
+            const newLocal = `<div class="a"><h4> Example 8 </h4> 
+            <pre><code class="language-javascript">   
+            class Project {
+                constructor() { 
+                    console.log(new.target);
+                    this.strTarget = new.target;
+                }
+            }
+            var p = new Project();
+            </code></pre>
+            <b>p.strTarget : ${p.strTarget} <br>
+            m.strTarget : ${m.strTarget}  </div>`;
+            $(DEFAULT).append(newLocal);
         };
-        
+               
         // Public methods
         return {
             syntaxSample :mySyntaxSample,
@@ -706,6 +834,10 @@
             classes2,
             classesMethods3,
             classesExpression4,
+            classesExtends5,
+            classesObjectLiteral6,
+            classesStaticFunctions7,
+            classesTarget8
             
         };
     };
