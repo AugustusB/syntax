@@ -527,8 +527,150 @@
             <b>newHigh : ${newHigh}</div>`;
             $(DEFAULT).append(newLocal);
            
-        };
+        },
+        advDestructorObject12 = () => {
+            let [high,low,] = [500,200]; 
+            console.log(`high:${high} low:${low}`);
+            const newLocal = `<div class="a"><h4> Example 12 </h4> 
+            <pre><code class="language-javascript">   
+            let [high,low,] = [500,200]; 
+            console.log(\`high:\${high} low:\${low}\`);
+            </code></pre>
+            <b>high : ${high} low : ${low}</div>`;
+            $(DEFAULT).append(newLocal);
+           
+        },
+        advForDestructorObject13 = () => {
+            for(let [a,b] of [[5,10]]){
+                console.log(`a : ${a} b : ${b}`);
+                const newLocal = `<div class="a"><h4> Example 13 </h4> 
+            <pre><code class="language-javascript">   
+            for(let [a,b] of [[5,10]]){
+                console.log(\`a : \${a} b : \${b}\`);
+            }
+            </code></pre>
+            <b>a : ${a} b : ${b}</div>`;
+            $(DEFAULT).append(newLocal);
+            }
+        }, 
+        advThrowDestructorObject14 = () => {
+            try{
+                throw[123,'message'];
+            }catch([invoiceNum,errorMessage]){
+                console.log(`invoiceNum: ${invoiceNum} errorMessage : ${errorMessage}`);
+                const newLocal = `<div class="a"><h4> Example 14 </h4> 
+            <pre><code class="language-javascript">   
+            try{
+                throw[123,'message'];
+            }catch([invoiceNum,errorMessage]){
+                console.log(\`invoiceNum: \${invoiceNum} errorMessage : \${errorMessage}\`);
+            }
+            </code></pre>
+            <b>invoiceNum: ${invoiceNum} errorMessage : ${errorMessage}</div>`;
+            $(DEFAULT).append(newLocal);
+            }
+          
+        },
+        advDestructorObject15 = () => {
+            function getResult(){
+                let high,low;
+                return {high,low} = {high:500,low:200};
+            }
+            console.log(getResult());
+            const newLocal = `<div class="a"><h4> Example 15 </h4> 
+            <pre><code class="language-javascript">   
+            function getResult(){
+                let high,low;
+                return {high,low} = {high:500,low:200};
+            }
+            console.log(getResult());
+            </code></pre>
+            <b>getResult() : ${JSON.stringify(getResult(), null, 2)}</div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        classes1 = () =>{
+            class Task{
 
+            };
+            console.log(typeof Task);
+            const newLocal = `<div class="a"> <h2> classes </h2><h4> Example 1 </h4> 
+            <pre><code class="language-javascript">   
+            class Task{
+
+            };
+            console.log(typeof Task);
+            </code></pre>
+            <b>typeof Task : ${typeof Task}</div>`;
+            $(DEFAULT).append(newLocal);
+        },        
+        classes2 = () =>{
+            class Task{}
+            let taskObj = new Task();
+            console.log(typeof taskObj);
+            console.log(taskObj instanceof Task);
+            const newLocal = `<div class="a"><h4> Example 2 </h4> 
+            <pre><code class="language-javascript">   
+            class Task{}
+            let taskObj = new Task();
+            console.log(typeof taskObj);
+            console.log(taskObj instanceof Task);
+            </code></pre>
+            <b>typeof taskObj : ${typeof taskObj} <br>taskObj instanceof Task : ${taskObj instanceof Task}</div>`;
+            $(DEFAULT).append(newLocal);
+        },        
+        classesMethods3 = () =>{
+            class Task{
+                constructor(){
+                    console.log('constructingTask');
+                }
+                showId(){
+                    console.log('99');
+                    return '99';
+                }
+            }
+            let task = new Task();
+            task.showId();
+            console.log(task.showId===Task.prototype.showId);
+            const newLocal = `<div class="a"><h4> Example 3 </h4> 
+            <pre><code class="language-javascript">   
+            class Task{
+                constructor(){
+                    console.log('constructingTask');
+                }
+                showId(){
+                    console.log('99');
+                    return '99';
+                }
+            }
+            let task = new Task();
+            task.showId();
+            console.log(task.showId===Task.prototype.showId);
+            </code></pre>
+            <b>task.showId() : ${task.showId()} <br> 
+            task.showId===Task.prototype.showId : ${task.showId===Task.prototype.showId} <br>
+            </div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        classesExpression4 = () =>{
+            let myClass = class Task{
+                constructor(){
+                    console.log('constructingTask');
+                }
+            };
+            new myClass();
+            const newLocal = `<div class="a"><h4> Example 4 </h4> 
+            <pre><code class="language-javascript">   
+            let myClass = class Task{
+                constructor(){
+                    console.log('constructingTask');
+                }
+            };
+            new myClass();
+            </code></pre>
+            <b>new myClass() : constructingTask</div>`;
+            $(DEFAULT).append(newLocal);
+        };
+        
         // Public methods
         return {
             syntaxSample :mySyntaxSample,
@@ -555,7 +697,15 @@
             destructorFrunctionPara8,
             destructorObject9,
             destructorObject10,
-            destructorObject11
+            destructorObject11,
+            advDestructorObject12,
+            advForDestructorObject13,
+            advThrowDestructorObject14,
+            advDestructorObject15,
+            classes1,
+            classes2,
+            classesMethods3,
+            classesExpression4,
             
         };
     };
