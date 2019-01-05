@@ -797,6 +797,170 @@
             <b>p.strTarget : ${p.strTarget} <br>
             m.strTarget : ${m.strTarget}  </div>`;
             $(DEFAULT).append(newLocal);
+        },
+        symbolSyntax = () =>{
+            let eventSymbol = Symbol('resize event');
+            console.log(typeof eventSymbol);
+            console.log(eventSymbol.toString());
+
+            const CALCULATE_EVENT_SYMBOL=Symbol('calculate event');
+            console.log(CALCULATE_EVENT_SYMBOL.toString());
+
+            let s = Symbol.for('event');
+            console.log(s.toString());
+
+            let s2 = Symbol('event');
+            console.log(s === s2);
+
+            let s3 = Symbol.for('event');
+            console.log(s === s3);
+
+            let description = Symbol.keyFor(s3);
+            console.log(description);
+
+            let article={
+                title:'WhitefaceMountain',
+                [Symbol.for('article')]:'MyArticle'
+            };
+            let value = article[Symbol.for('article')];
+            console.log(value);
+
+            console.log(Object.getOwnPropertySymbols(article)); 
+            const newLocal = `<div class="a"> <h2> Symbol syntax </h2><h4> Example 1 </h4> 
+            <pre><code class="language-javascript">   
+            let eventSymbol = Symbol('resize event');
+            console.log(typeof eventSymbol);
+            console.log(eventSymbol.toString());
+            
+            // Constants
+            const CALCULATE_EVENT_SYMBOL=Symbol('calculate event');
+            console.log(CALCULATE_EVENT_SYMBOL.toString());
+
+            // Using symbol registry - will create or return existing symbol with creating unique symobol for same key string.
+            let s = Symbol.for('event');
+            console.log(s.toString());
+
+            // Always creates unique value.
+            let s2 = Symbol('event');
+            console.log(s === s2);
+
+            // Get symbol from registry to stop stop duplicate keys.
+            let s3 = Symbol.for('event');
+            console.log(s === s3);
+
+            // Get key
+            let description = Symbol.keyFor(s3);
+            console.log(description);
+
+            // symbols for objects literals
+            let article={
+                title:'WhitefaceMountain',
+                [Symbol.for('article')]:'MyArticle'
+            };
+            let value = article[Symbol.for('article')];
+            console.log(value);
+
+            // Can get property names but cannot use Object.getOwnPropertyNames()
+            console.log(Object.getOwnPropertySymbols(article)); 
+            </code></pre>
+            <b>typeof eventSymbol : ${typeof eventSymbol} <br>
+            eventSymbol.toString() : ${eventSymbol.toString()}<br>
+            CALCULATE_EVENT_SYMBOL.toString() : ${CALCULATE_EVENT_SYMBOL.toString()} <br>
+            s.toString() : ${s.toString()} <br>
+            s === s2 : ${s === s2} <br>
+            s === s3 : ${s === s3} <br>
+            Symbol.keyFor(s3) : ${ Symbol.keyFor(s3)} <br>
+            value : ${value} <br>
+            Object.getOwnPropertySymbols(article) :  ${Object.getOwnPropertySymbols(article)[0].toString()}</div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        symbolSyntax1 = () =>{
+            let Blog = function(){};
+            let blog = new Blog();
+            console.log(blog.toString());
+
+            let Blog1 = function(){};
+            Blog1.prototype[Symbol.toStringTag] = 'Blog1Class';
+            let blog1 = new Blog1();
+            console.log(blog1.toString());
+            const newLocal = `<div class="a"><h4> Example 2 </h4> 
+            <pre><code class="language-javascript">
+            let Blog = function(){};
+            let blog = new Blog();
+            console.log(blog.toString());
+
+            let Blog1 = function(){};
+            Blog1.prototype[Symbol.toStringTag] = 'Blog1Class';
+            let blog1 = new Blog1();
+            console.log(blog1.toString());
+            </code></pre>   
+            <b>blog.toString() :  ${blog.toString()}<br>
+            blog1.toString() : ${blog1.toString()}
+            </div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        symbolSyntax2 = () =>{
+            let values=[8,12,16];
+            console.log([].concat(values));
+
+            let values1=[8,12,16];
+            values1[Symbol.isConcatSpreadable] = false;
+            console.log([].concat(values1));
+            const newLocal = `<div class="a"><h4> Example 2 </h4> 
+            <pre><code class="language-javascript">
+            let values=[8,12,16];
+            console.log([].concat(values));
+
+            let values1=[8,12,16];
+            values1[Symbol.isConcatSpreadable] = false;
+            console.log([].concat(values1));;
+            </code></pre>   
+            <b>[].concat(values) :  ${[].concat(values)}<br>
+            [].concat(values1) : ${[].concat(values1)}
+            </div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        objectSetPrototypeOf = () =>{
+            // setPrototypeOf
+            let a = {x:1};
+            let b = {y:2};
+            Object.setPrototypeOf(a,b);
+            console.log(a.y);
+
+            // assign
+            let target = {};
+            Object.assign(target,a,b);
+            console.log(target);
+
+            // not enumerable
+            let target1 = {};
+            Object.defineProperty(b,'c',{value:10,enumerable:false});
+            Object.assign(target1,a,b);
+            console.log(target1);
+            const newLocal = `<div class="a"><h2> Object Extensions </h2><h4> Example 1 </h4> 
+            <pre><code class="language-javascript">
+            // setPrototypeOf
+            let a = {x:1};
+            let b = {y:2};
+            Object.setPrototypeOf(a,b);
+            console.log(a.y);
+
+            // assign
+            let target = {};
+            Object.assign(target,a,b);
+            console.log(target);
+
+            // not enumerable
+            let target1 = {};
+            Object.defineProperty(b,'c',{value:10,enumerable:false});
+            Object.assign(target1,a,b);
+            console.log(target1);
+            </code></pre>   
+            <b>console.log(a.y) :  ${a.y}<br>
+            console.log(target) : ${target}<br>
+            console.log(target1) : ${target1}
+            </div>`;
+            $(DEFAULT).append(newLocal);
         };
                
         // Public methods
@@ -837,7 +1001,11 @@
             classesExtends5,
             classesObjectLiteral6,
             classesStaticFunctions7,
-            classesTarget8
+            classesTarget8,
+            symbolSyntax,
+            symbolSyntax1,
+            symbolSyntax2,
+            objectSetPrototypeOf
             
         };
     };
