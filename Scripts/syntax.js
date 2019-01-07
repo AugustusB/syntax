@@ -1059,7 +1059,7 @@
             let waveSurfer = '\u{1f30a}\u{1f3c4}';
             console.log(waveSurfer.repeat(10));
             
-            const newLocal = `<div class="a" style = "font-size : 200%;"><h2> String extensions - is </h2><h4> Example 1 </h4>  
+            const newLocal = `<div class="a"><h2> String extensions - is </h2><h4> Example 1 </h4>  
             <pre><code class="language-javascript">
             var title="Surfer's \\u{1f3c4} Blog";
             console.log(title);
@@ -1097,8 +1097,9 @@
             let waveSurfer = '\\u{1f30a}\\u{1f3c4}';
             console.log(waveSurfer.repeat(10));
 
-            </code></pre>   
-            <b>${output} :  ${title}<br>
+            </code></pre> 
+            </div>  
+            <div style = "font-size : 200%;"><b>${output} :  ${title}<br>
             surfer.length : ${surfer.length} <br>
             Array.from(surfer).length : ${Array.from(surfer).length} <br>
             surfer1 ; ${surfer1}<br>
@@ -1108,6 +1109,75 @@
             title1.normalize().codePointAt(7).toString(16) : ${title1.normalize().codePointAt(7).toString(16)}<br>
             String.fromCodePoint(0x1f3c4) : ${String.fromCodePoint(0x1f3c4)} <br>
             waveSurfer.repeat(10) : ${waveSurfer.repeat(10)}
+            </div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        numberExtensions = () => {
+
+            // Extensions Number.parseInt
+            console.log(Number.parseInt === parseInt);
+            console.log(Number.parseFloat === parseFloat);
+
+            // NaN where it is a string 'NaN' instead of NaN
+            let s = 'NaN';
+            console.log(isNaN(s));
+            console.log(Number.isNaN(s));
+
+            // When variable is a number as a string.
+            let s1 = '8000';
+            console.log(isFinite(s1));
+            console.log(Number.isFinite(s1));
+
+            // Integer extensions
+            let sum = 408.2;
+            console.log(Number.isInteger(sum));
+            console.log(Number.isInteger(NaN));
+            console.log(Number.isInteger(Infinity));
+            console.log(Number.isInteger(undefined));
+            console.log(Number.isInteger(3));
+
+            // highest integer
+            let a = Math.pow(2,53)-1;
+            console.log(Number.isSafeInteger(a));
+            let a1 = Math.pow(2,53);
+            console.log(Number.isSafeInteger(a1));
+
+            const newLocal = `<div class="a"><h2>Number extensions </h2><h4> Example 1 </h4>  
+            <pre><code class="language-javascript">
+            // Extensions Number.parseInt
+            console.log(Number.parseInt === parseInt);
+            console.log(Number.parseFloat === parseFloat);
+
+            // NaN where it is a string 'NaN' instead of NaN
+            let s = 'NaN';
+            console.log(isNaN(s));
+            console.log(Number.isNaN(s));
+
+            // When variable is a number as a string.
+            let s1 = '8000';
+            console.log(isFinite(s1));
+            console.log(Number.isFinite(s1));
+
+            // highest integer
+            let a = Math.pow(2,53)-1;
+            console.log(Number.isSafeInteger(a));
+            let a1 = Math.pow(2,53);
+            console.log(Number.isSafeInteger(a1));
+
+            </code></pre>   
+            <b>Number.parseInt === parseInt :  ${Number.parseInt === parseInt}<br>
+            Number.parseFloat === parseFloat : ${Number.parseFloat === parseFloat}<br>
+            isNaN(s) : ${isNaN(s)}<br>
+            Number.isNaN(s) : ${Number.isNaN(s)}<br>
+            isFinite(s1) : ${isFinite(s1)}<br>
+            Number.isFinite(s1) : ${Number.isFinite(s1)}<br>
+            Number.isInteger(sum) : ${Number.isInteger(sum)}<br>
+            Number.isInteger(NaN) : ${Number.isInteger(NaN)}<br>
+            Number.isInteger(Infinity) : ${Number.isInteger(Infinity)}<br>
+            Number.isInteger(undefined) : ${Number.isInteger(undefined)}<br>
+            Number.isInteger(3) : ${Number.isInteger(3)}<br>
+            Number.isSafeInteger(a) (${a}) : ${Number.isSafeInteger(a)}<br>
+            Number.isSafeInteger(a1) (${a1}) : ${Number.isSafeInteger(a1)}<br>
             </div>`;
             $(DEFAULT).append(newLocal);
         };
@@ -1157,7 +1227,9 @@
             objectSetPrototypeOf,
             objectis,
             stringExtensions,
-            stringExtensionsImogi
+            stringExtensionsImogi,
+            numberExtensions
+
         };
     };
 
