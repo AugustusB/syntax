@@ -937,6 +937,14 @@
             Object.defineProperty(b,'c',{value:10,enumerable:false});
             Object.assign(target1,a,b);
             console.log(target1);
+
+            // assign will not walk the prototype chain.
+            b.z = 5;
+            let c = {c:20};
+            Object.setPrototypeOf(b, c);
+            let target2 = {};
+            Object.assign(target2, a, b);
+            console.log(target2);
             const newLocal = `<div class="a"><h2> Object Extensions </h2><h4> Example 1 </h4> 
             <pre><code class="language-javascript">
             // setPrototypeOf
@@ -955,10 +963,151 @@
             Object.defineProperty(b,'c',{value:10,enumerable:false});
             Object.assign(target1,a,b);
             console.log(target1);
+
+            // assign will not walk the prototype chain.
+            let a = {a:1}, 
+            b = {a:5, b:2},
+            c = {c:20};
+            Object.setPrototypeOf(b, c);
+            let target2 = {};
+            Object.assign(target2, a, b);
+            console.log(target2);
+
             </code></pre>   
             <b>console.log(a.y) :  ${a.y}<br>
-            console.log(target) : ${target}<br>
-            console.log(target1) : ${target1}
+            console.log(target) : ${JSON.stringify(target, null, 2)}<br>
+            console.log(target1) : ${JSON.stringify(target1, null, 2)}<br>
+            console.log(target2) : ${JSON.stringify(target2, null, 2)}
+            </div>`;
+            $(DEFAULT).append(newLocal);
+        }, 
+        objectis = () =>{
+            let amount1 = NaN;
+            let amount = 0, total = -0;
+            
+            console.log(amount1 === amount1);
+            console.log(Object.is(amount, amount));
+            console.log(Object.is(amount,total));
+
+            const newLocal = `<div class="a"><h2> Object extensions - is </h2><h4> Example 1 </h4>  
+            <pre><code class="language-javascript">
+            let amount1 = NaN;
+            let amount = 0, total = -0;
+            
+            console.log(amount1 === amount1);
+            console.log(Object.is(amount, amount));
+            console.log(Object.is(amount, total));
+            </code></pre>   
+            <b>amount1 === amount1 :  ${amount1 === amount1}<br>
+            Object.is(amount, amount) : ${Object.is(amount, amount)}<br>
+            Object.is(amount, total) : ${Object.is(amount,total)}
+            </div>`;
+            $(DEFAULT).append(newLocal);
+        },
+        stringExtensions = () => {
+            let title = 'SantaBarbaraSurfRiders';
+            console.log(title.startsWith('Santa'));
+            console.log(title.endsWith('Rider'));
+            console.log(title.includes('ba'));
+
+            const newLocal = `<div class="a"><h2> String extensions - is </h2><h4> Example 1 </h4>  
+            <pre><code class="language-javascript">
+            let title = 'SantaBarbaraSurfRiders';
+            console.log(title.startsWith('Santa'));
+            console.log(title.endsWith('Rider'));
+            console.log(title.includes('ba'));
+            </code></pre>   
+            <b>title.startsWith('Santa') :  ${title.startsWith('Santa')}<br>
+            title.endsWith('Rider') : ${title.endsWith('Rider')}<br>
+            title.includes('ba') : ${title.includes('ba')}
+            </div>`;
+            $(DEFAULT).append(newLocal);
+        }, 
+        stringExtensionsImogi = () => {
+            var title="Surfer's \u{1f3c4} Blog";
+            console.log(title);
+
+            // Length of astral plane charactor
+            var surfer="\u{1f3c4}";
+            console.log(surfer.length);
+
+            var output = String.raw`Surfer's \u{1f3c4} Blog`;
+
+            // Normalise length
+            console.log(Array.from(surfer).length);
+
+            // Another way to Normalise
+            var surfer1 = "\u{1f30a}\u{1f3c4}\u{1f40b}";
+            console.log(Array.from(surfer1).length);
+            console.log(surfer1);
+
+            // Wrong size of string
+            var title1 = "Mazatla\u{0301}n";
+            console.log(title1 + '' + title1.length);
+ 
+            // Correcting the length of string by normalising
+            console.log(title1 + '' + title1.normalize().length);
+
+            // just for fun
+            var title2 = "Big \u{1f40b} eat little \u{1F41F}";
+            console.log(title2);
+
+            // Ascii 
+            console.log(title.normalize().codePointAt(7).toString(16));
+
+            // Repeat 
+            let waveSurfer = '\u{1f30a}\u{1f3c4}';
+            console.log(waveSurfer.repeat(10));
+            
+            const newLocal = `<div class="a" style = "font-size : 200%;"><h2> String extensions - is </h2><h4> Example 1 </h4>  
+            <pre><code class="language-javascript">
+            var title="Surfer's \\u{1f3c4} Blog";
+            console.log(title);
+
+            // Length of astral plane charactor
+            var surfer= "\\u{1f3c4}\\";
+            console.log(surfer.length);
+
+            // Normalise length
+            console.log(Array.from(surfer).length);
+
+            // Another Normalise example
+            var surfer1 = "\\u{1f30a}\\u{1f3c4}\\u{1f40b}";
+            console.log(Array.from(surfer1).length);
+            console.log(surfer1);
+
+            // Wrong length of string, should be 8 but is 9
+            var title1 = "Mazatla\\u0301n";
+            console.log(title1 + ''+ title1.length);
+
+            // Correcting the length of string by normalising
+            console.log(title1 + '' + title1.normalize().length);
+
+            // just for fun
+            var title2 = "Big \\u{1f40b} eat little \\{u1F41F}";
+            console.log(title2);
+
+            // Ascii 
+            console.log(title1.normalize().codePointAt(7).toString(16));
+
+            // Imogi hex to string
+            console.log(String.fromCodePoint(0x1f3c4));
+
+            // Repeat 
+            let waveSurfer = '\\u{1f30a}\\u{1f3c4}';
+            console.log(waveSurfer.repeat(10));
+
+            </code></pre>   
+            <b>${output} :  ${title}<br>
+            surfer.length : ${surfer.length} <br>
+            Array.from(surfer).length : ${Array.from(surfer).length} <br>
+            surfer1 ; ${surfer1}<br>
+            title1 - title1.length : ${title1} - ${title1.length}<br>
+            title1 - title1.normalize().length : ${title1} - ${title1.normalize().length}<br>
+            Big \\u{1f40b} eat little \\u1F41F : ${title2}
+            title1.normalize().codePointAt(7).toString(16) : ${title1.normalize().codePointAt(7).toString(16)}<br>
+            String.fromCodePoint(0x1f3c4) : ${String.fromCodePoint(0x1f3c4)} <br>
+            waveSurfer.repeat(10) : ${waveSurfer.repeat(10)}
             </div>`;
             $(DEFAULT).append(newLocal);
         };
@@ -1005,8 +1154,10 @@
             symbolSyntax,
             symbolSyntax1,
             symbolSyntax2,
-            objectSetPrototypeOf
-            
+            objectSetPrototypeOf,
+            objectis,
+            stringExtensions,
+            stringExtensionsImogi
         };
     };
 
