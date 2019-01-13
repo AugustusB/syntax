@@ -462,6 +462,7 @@
         },
         destructorObject9 = () => {
             var salary = {
+                myNum: '100',
                 low:'32000',
                 average:'50000',
                 high:'75000'
@@ -471,6 +472,7 @@
             const newLocal = `<div class="a"><h4> Example 9 </h4> 
             <pre><code class="language-javascript">   
             var salary = {
+                myNum: '100',
                 low:'32000',
                 average:'50000',
                 high:'75000'
@@ -587,6 +589,45 @@
             </code></pre>
             <b>getResult() : ${JSON.stringify(getResult(), null, 2)}</div>`;
             $(DEFAULT).append(newLocal);
+        },
+        destructorObject16 = () => {
+            var salary = {
+                myNum: '100',
+                low:'32000',
+                average:'50000',
+                high:'75000',
+                gridMain : {
+                    gMin: 9,
+                    gHigh: 100
+                }
+            };
+
+            function result(p, {high, low, gridMain} ){
+                return `${p}  ${high}  ${low}  ${gridMain.gHigh}`;
+            }
+            var rtn = result('hi', salary);
+            console.log(rtn);
+            const newLocal = `<div class="a"><h4> Example 16 </h4> 
+            <pre><code class="language-javascript">   
+            var salary = {
+                myNum: '100',
+                low:'32000',
+                average:'50000',
+                high:'75000',
+                gridMain : {
+                    gMin: 9,
+                    gHigh: 100
+                }
+            };
+            function result(p, {high, low, gridMain}){
+                return "p  high  low  gridMain.gHigh";
+            }
+            var rtn = result('hi', salary);
+            console.log(rtn);
+            </code></pre>
+            <b>rtn : ${rtn}</div>`;
+            $(DEFAULT).append(newLocal);
+           
         },
         classes1 = () =>{
             class Task{
@@ -1180,7 +1221,216 @@
             Number.isSafeInteger(a1) (${a1}) : ${Number.isSafeInteger(a1)}<br>
             </div>`;
             $(DEFAULT).append(newLocal);
-        };
+        },
+        iteratorSyntax1 = () => {
+            // What is the typeof Symbol.iterator
+            let ids=[9000,9001,9002];
+            console.log(typeof ids[Symbol.iterator] );
+
+            // using iterator
+            let it = ids[Symbol.iterator]();
+            console.log(it.next());
+
+            // End of iteration - tha last value 
+            let ids1=[9000,9001,9002];
+            let it1 = ids[Symbol.iterator]();
+            it1.next();
+            it1.next();
+            var itv = it1.next()
+            console.log(itv);
+
+            // End of iteration - Done True 
+            let ids2=[9000,9001,9002];
+            let it2 = ids[Symbol.iterator]();
+            it2.next();
+            it2.next();
+            it2.next();
+            var itv2 = it2.next()
+            console.log(itv2);
+
+            // Create your own iterator
+            let idMaker = { 
+                [Symbol.iterator]() {
+                    let nextId = 8000;
+                    return {
+                        next() {
+                            return {
+                                value : nextId++,
+                                done : false
+                            };
+                        }
+                    };
+                }
+            };
+            let it3 = idMaker[Symbol.iterator]();
+            console.log(it3.next().value);
+            console.log(it3.next().value);
+            let it3Val = it3.next().value;
+            console.log(it3Val);
+
+            // using for...of to iterate
+            let idMaker1 = {
+                [Symbol.iterator]() {
+                    let nextId = 8000;
+                    return {
+                        next() {
+                            return { 
+                                value: nextId++,
+                                done:false
+                            };
+                        }
+                    };
+                }
+            };
+            let results1 = '';
+            for(let v of idMaker1) {
+                if(v > 8002) 
+                    break;
+                results1 += `${v}\n`;
+            } 
+            console.log(results1);
+
+            // Using for...of to iterate with end of sequence defined in iterator
+            let idMaker2 = {
+                [Symbol.iterator]() {
+                    let nextId = 8000;
+                    return {
+                        next() {
+                            let value = nextId > 8002 ? undefined : nextId++;
+                            let done = !value;
+                            return {
+                                value,
+                                done
+                            };
+                        }
+                    };
+                }
+            };
+            let results2 = '';
+            for(let v of idMaker2)
+                results2 += `${v}\n`;
+            console.log(results2);
+
+            // Example of using iterator with the spread operator
+            let ids3 = [8000,8001,8002];
+            let idVal = 0;
+            function process(id1,id2,id3) {
+                idVal = id3;
+                console.log(idVal);
+            }
+            process(...ids3);
+
+            const newLocal = `<div class="a"><h2>Iterator</h2><h4> Example 1 </h4>  
+            <pre><code class="language-javascript">
+            // What is the typeof Symbol.iterator
+            let ids=[9000,9001,9002];
+            console.log(typeof ids[Symbol.iterator] );
+
+            // using iterator
+            let it = ids[Symbol.iterator]();
+            console.log(it.next());
+
+            // End of iteration - tha last value 
+            let ids1=[9000,9001,9002];
+            let it1 = ids[Symbol.iterator]();
+            it1.next();
+            it1.next();
+            var itv = it1.next()
+            console.log(itv);
+
+            // End of iteration - Done True 
+            let ids2=[9000,9001,9002];
+            let it2 = ids[Symbol.iterator]();
+            it2.next();
+            it2.next();
+            it2.next();
+            var itv2 = it2.next()
+            console.log(itv2);
+
+            // Create your own iterator
+            let idMaker = { 
+                [Symbol.iterator]() {
+                    let nextId = 8000;
+                    return {
+                        next() {
+                            return {
+                                value : nextId++,
+                                done : false
+                            };
+                        }
+                    };
+                }
+            };
+            let it3 = idMaker[Symbol.iterator]();
+            console.log(it3.next().value);
+            console.log(it3.next().value);
+            let it3Val = it3.next().value;
+            console.log(it3Val);
+
+            // using for...of to iterate
+            let idMaker1 = {
+                [Symbol.iterator]() {
+                    let nextId = 8000;
+                    return {
+                        next() {
+                            return { 
+                                value: nextId++,
+                                done:false
+                            };
+                        }
+                    };
+                }
+            };
+            let results1;
+            for(let v of idMaker1) {
+                if(v > 8002) 
+                    break;
+                results1 += \`\${v}\`;
+            } 
+            console.log(results1);
+
+            // Using for...of to iterate with end of sequence defined in iterator
+            let idMaker2 = {
+                [Symbol.iterator]() {
+                    let nextId = 8000;
+                    return {
+                        next() {
+                            let value = nextId > 8002 ? undefined : nextId++;
+                            let done = !value;
+                            return {
+                                value,
+                                done
+                            };
+                        }
+                    };
+                }
+            };
+            let results2 = '';
+            for(let v of idMaker2)
+                results2 += \`\${v}\`;
+            console.log(results2);
+
+            // Example of using iterator with the spread operator
+            let ids3 = [8000,8001,8002];
+            let idVal = 0;
+            function process(id1,id2,id3) {
+                idVal = id3;
+                console.log(idVal);
+            }
+            process(...ids3);
+
+            </code></pre>   
+            <b>typeof ids[Symbol.iterator]  :  ${typeof ids[Symbol.iterator]}<br>
+            it.next() : ${JSON.stringify(it.next(), null, 2)}<br>
+            it1.next() : ${JSON.stringify(itv, null, 2)}<br>
+            it2.next() : ${JSON.stringify(itv2, null, 2)}<br>
+            console.log(it3.next().value) : ${it3Val}<br>
+            results1 : ${results1}<br>
+            results2 : ${results2}<br>
+            idVal : ${idVal}
+            </div>`;
+            $(DEFAULT).append(newLocal);
+        } ;
                
         // Public methods
         return {
@@ -1213,6 +1463,7 @@
             advForDestructorObject13,
             advThrowDestructorObject14,
             advDestructorObject15,
+            destructorObject16,
             classes1,
             classes2,
             classesMethods3,
@@ -1228,7 +1479,8 @@
             objectis,
             stringExtensions,
             stringExtensionsImogi,
-            numberExtensions
+            numberExtensions,
+            iteratorSyntax1
 
         };
     };
