@@ -1,7 +1,7 @@
 (function(ns1, ns2){
     'use strict'
     ns2.ES6Obj = function ES6Obj(){
-        // Private methods
+        // Private methods.
         const DEFAULT = 'body';
         var mySyntaxSample = function mySyntaxSample(findElem, productId){
 
