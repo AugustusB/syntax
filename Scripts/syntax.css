@@ -1,6 +1,17 @@
+
 div.a {
     text-indent: 50px;
 }
 div b {
     color: red;
+}
+#footerImg img {
+    width: 5em;
+    height: 5em;
+}
+.jumbotron {
+    background-image: url('../img/students.png');
+    background-repeat: no-repeat;
+    background-size: 8%;
+    background-position: right center;
 }

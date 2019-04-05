@@ -4,10 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!-- <script src="../../jquery-3.3.1.js"></script> -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Bootstap fontawesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="Scripts/syntax.css"/>
+    <title>ES6 Examples</title>
+    
+</head>
+<body>
+
+    <div class="container-fluid mt-5 top">
+
+        
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-info" id="mainNav">
+            <div class="container-fluid">
+                <a class="navbar-brand js-scroll-trigger" href="#top">
+                    <img src="img/jsNavBarMenu.png" width="30" height="30" class="d-inline-block align-top" alt="ES6">
+                    ES6
+                </a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" 
+                data-toggle="collapse" data-target="#navbarResponsive" 
+                aria-controls="navbarResponsive" aria-expanded="false" 
+                aria-label="Toggle Navigation">
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ml-auto" >
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Sub-Link 1</a>
+                                    <a class="dropdown-item" href="#">Sub-Link 2</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Sub-Link 3</a>
+                                </div>
+                            </li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#link1">Link1</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#link2">Link2</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#link3">Link3</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#link4">Link4</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#link5">Link5</a></li>
+
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+                        </form>
+            
+                    </ul>
+                </div>
+            </div>
+        </nav>
+          
+
+        <div class="jumbotron p-4">
+
+            <div class="container-fluid row">
+                <div class="col-md-8">
+                <h1 class="display-7">ES6 with Gus</h1>
+                <hr class="my-2">
+                <p class="lead text-secondary">Let's try out the new features of javascript - ECMA script 6.</p>
+                </div>
+            </div>
+        </div>
+
+   
+    
+
+        <section>   
+
+        </section>
+ 
+        <footer class="bg-dark py-1 text-light text-center p-1">
+            <div class="container">
+                <div class="btn-group btn-group-sm my-1" role="group" aria-label="footer">
+                    
+                    <button type="button" class="btn btn-secondary"><i class="fa fa-github-alt"></i></button>
+                    <button type="button" class="btn btn-secondary"><i class="fa fa-linkedin"></i></button>
+                    <button type="button" class="btn btn-secondary"><i class="fa fa-twitter"></i></button>
+                    <button type="button" class="btn btn-secondary"><i class="fa fa-facebook"></i></button>
+                    
+                </div>
+            
+                <small>
+                    <p class="mb-1">&copy;2019 ECMA script 6</p>
+                    <p class="mb-1">&ldquo;We’re all looking at ES6 javascript. &rdquo; &mdash; Other frameworks used <em>HTML5, Bootstrap4 and CCS3</em></p>
+                </small>
+                <div id="footerImg">
+                    <img class="img-fluid" src="img/jsHtmlCss.png"  alt="HTML5 Boostrap4 CCS3">
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>  
     <script src="Scripts/syntax.js"></script>
     <script>
         $(function(){
@@ -72,9 +166,6 @@
             syn.promises();
 
         });
-    </script>
-</head>
-<body>
-    
+    </script> 
 </body>
 </html>

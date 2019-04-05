@@ -1818,6 +1818,50 @@
                 }
             );
 
+             // example 6 - promise reject with catch 
+             function doAsync6() { 
+                let p = new Promise(function (resolve, reject) { 
+                    console.log('in promise code'); 
+                    setTimeout(function () { 
+                        reject('Nope no go....'); 
+                    }, 5000); 
+                }); 
+                return p; 
+            }
+            doAsync6().catch(
+                function(reason){console.log('Error : ' + reason);}
+            ).then(
+                function(value){console.log('fulfilled....' + value);},
+                function(resaon){console.log('rejected 1st then....' + resaon);}
+            ).then(
+                function(value){console.log('Really....' + value);},
+                function(resaon){console.log('rejected 2nd then ....' + resaon);}
+            );
+
+            // example 7 - resolved without waiting for work to complete
+            function doAsync7() { 
+                return Promise.resolve('resolve called in promises....'); 
+            }
+            doAsync7().then( 
+                function (value) { console.log('Ok: ' + value) }, 
+                function (reason) { console.log('Nope: ' + reason)} 
+            );
+
+            // example 8 - Reject without waiting for work to complete
+            function doAsync8() { 
+                return Promise.reject('reject called in promise....'); 
+            }
+            doAsync8().then( 
+                function (value) { console.log('Ok: ' + value) }, 
+                function (reason) { console.log('Nope: ' + reason)} 
+            );
+
+            // Run all promises with success.
+            Promise.all([doAsync9a, doAsync9b]).then( 
+                function (value) { console.log('Ok') }, 
+                function (reason) { console.log('Nope') } 
+            );
+
             const newLocal = `<div class="a"><h2>Promises</h2>  
             <pre><code class="language-javascript">
             // example 1 - promise resolve
@@ -1901,12 +1945,90 @@
                 }
             );
 
+            // example 6 - promise reject with catch 
+             function doAsync6() { 
+                let p = new Promise(function (resolve, reject) { 
+                    console.log('in promise code'); 
+                    setTimeout(function () { 
+                        reject('Nope no go....'); 
+                    }, 5000); 
+                }); 
+                return p; 
+            }
+            doAsync6().catch(
+                function(reason){console.log('Error : ' + reason);}
+            ).then(
+                function(value){console.log('fulfilled....' + value);},
+                function(resaon){console.log('rejected 1st then....' + resaon);}
+            ).then(
+                function(value){console.log('Really....' + value);},
+                function(resaon){console.log('rejected 2nd then ....' + resaon);}
+            );
+
+            // example 7 - promise resolved without waiting for work to complete
+            function doAsync7() { 
+                return Promise.resolve('resolve called in promise....'); 
+            }
+            doAsync7().then( 
+                function (value) { console.log('Ok: ' + value) }, 
+                function (reason) { console.log('Nope: ' + reason)} 
+            );
+
+            // example 8 - Reject without waiting for work to complete
+            function doAsync8() { 
+                return Promise.reject('reject called in promise....'); 
+            }
+            doAsync8().then( 
+                function (value) { console.log('Ok: ' + value) }, 
+                function (reason) { console.log('Nope: ' + reason)} 
+            );
+
+            // example 9 - promise all resolve
+             var doAsync9a = new function doAsync9a() { 
+                let p = new Promise(function (resolve, reject) { 
+                    console.log('in promise code'); 
+                    setTimeout(function () { 
+                        resolve('OK to go....'); 
+                    }, 5000); 
+                }); 
+                return p; 
+            }
+            doAsync9a().then(
+                function(value){ console.log('fullfilled....' + value);},
+                function(value){ console.log('fullfilled....' + value);}
+            ));
+
+            var doAsync9b = new function doAsync9b() { 
+                let p = new Promise(function (resolve, reject) { 
+                    console.log('in promise code'); 
+                    setTimeout(function () { 
+                        reject('OK too! yes go....'); 
+                    }, 5000); 
+                }); 
+                return p; 
+            }
+            doAsync9b().then(
+                function(value){console.log('fulfilled....' + value);},
+                function(resaon){console.log('rejected 1st then....' + resaon);}
+            );
+
+            // Run all promises with success.
+            Promise.all([doAsync9a, doAsync9b]).then( 
+                function (value) { console.log('Ok') }, 
+                function (reason) { console.log('Nope') }; 
+            );
+
             </code></pre>
             <b>example 1 immediate : in promise code - after 5 seconds setTimout : resolving... <br>
             <b>example 2 immediate : in promise code - after 5 seconds setTimout : rejecting... <br>
             <b>example 3 immediate : in promise code - after 5 seconds setTimout : resolving...OK to go... <br>
             <b>example 4 immediate : in promise code - after 5 seconds setTimout : rejecting...Internet as crashed! <br>
-            <b>example 5 immediate : in promise code - after 5 seconds setTimout : resolving...OK to go...  Really....go go go....`;
+            <b>example 5 immediate : in promise code - after 5 seconds setTimout : resolving...OK to go...  Really....go go go.... <br>
+            <b>example 6 immediate : in promise code - after 5 seconds setTimout : Error...Nope no go.... <br>
+            <b>example 6 immediate : in promise code - after 5 seconds setTimout : fulfilled...undefined.... Not sure why????<br>
+            <b>example 6 immediate : in promise code - after 5 seconds setTimout : Really...undefined.... Not sure why???? <br>
+            <b>example 7 immediate : in promise code - after 5 seconds setTimout : Ok: resolve called in pormise... <br>
+            <b>example 8 immediate : in promise code - after 5 seconds setTimout : Nope: reject called in pormise...`;
             $(DEFAULT).append(newLocal);
 
         };
