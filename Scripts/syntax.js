@@ -1856,10 +1856,104 @@
                 function (reason) { console.log('Nope: ' + reason)} 
             );
 
-            // Run all promises with success.
-            Promise.all([doAsync9a, doAsync9b]).then( 
-                function (value) { console.log('Ok') }, 
-                function (reason) { console.log('Nope') } 
+            // example 9 - ALL promise all resolve
+            let p9a = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('OK to go....'); 
+                }, 3000); 
+            });
+
+            let p9b = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('OK too! yes go....'); 
+                }, 6000); 
+            }); 
+
+            Promise.all([p9a, p9b]).then( 
+                function (value) { console.log('ALL:Ok both promises done p9a, p9b afer 6 seconds...') }, 
+                function (reason) { console.log('ALL:Nope one of the promises (p9a, p9b) rejected...') } 
+            );
+
+             // example 10 - ALL promise 1st resloved afer 1sec then 2nd rejected after 7sec 
+             let p10a = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('OK to go....'); 
+                }, 1000); 
+            });
+
+            let p10b = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    reject('Nope! No go....'); 
+                }, 7000); 
+            }); 
+
+            Promise.all([p10a, p10b]).then( 
+                function (value) { console.log('ALL:Ok both promises done p10a, p10b afer 7 sec...') }, 
+                function (reason) { console.log('ALL:Nope one of the promises (p10a, p10b) rejected after 7sec...') } 
+            );
+
+            // example 11 - ALL promise 1st rejected afer 7sec then 2nd rejected after 10sec 
+            let p11a = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    reject('Nope! No go.....'); 
+                }, 7000); 
+            });
+
+            let p11b = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('Yes. Ok go....'); 
+                }, 10000); 
+            }); 
+
+            Promise.all([p11a, p11b]).then( 
+                function (value) { console.log('ALL:Ok both promises done p11a, p11b afer 10 sec...') }, 
+                function (reason) { console.log('ALL:Nope 1st of the promises (p11a, p11b) rejected after 7sec...') } 
+            );
+
+            // example 12 - RACE promise 1st resolved afer 7sec then 2nd resolved after 10sec 
+            let p12a = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('Yes p12a. Ok go.....'); 
+                }, 7000); 
+            });
+
+            let p12b = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('Yes p12b. Ok go....'); 
+                }, 10000); 
+            }); 
+
+            Promise.race([p12a, p12b]).then( 
+                function (value) { console.log('RACE:Ok 1st promises done after 7 sec (p12a, p12b)...') }, 
+                function (reason) { console.log('Nope promises (p12a, p12b) rejected...') } 
+            );
+
+            // example 13 - RACE promise 1st rejected afer 7sec then 2nd resolved after 10sec 
+            let p13a = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    reject('Nope p13a. On go.....'); 
+                }, 7000); 
+            });
+
+            let p13b = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('Yes p13b. Ok go....'); 
+                }, 10000); 
+            }); 
+
+            Promise.race([p13a, p13b]).then( 
+                function (value) { console.log('RACE:promises resolved after 10 sec (p13a, p13b)...') }, 
+                function (reason) { console.log('RACE:Nope 1st promises rejected after 7 sec (p13a, p13b)...') } 
             );
 
             const newLocal = `<div class="a"><h2>Promises</h2>  
@@ -1983,39 +2077,104 @@
                 function (reason) { console.log('Nope: ' + reason)} 
             );
 
-            // example 9 - promise all resolve
-             var doAsync9a = new function doAsync9a() { 
-                let p = new Promise(function (resolve, reject) { 
-                    console.log('in promise code'); 
-                    setTimeout(function () { 
-                        resolve('OK to go....'); 
-                    }, 5000); 
-                }); 
-                return p; 
-            }
-            doAsync9a().then(
-                function(value){ console.log('fullfilled....' + value);},
-                function(value){ console.log('fullfilled....' + value);}
-            ));
+            // example 9 - ALL promise all resolve
+            let p9a = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('OK to go....'); 
+                }, 2000); 
+            });
 
-            var doAsync9b = new function doAsync9b() { 
-                let p = new Promise(function (resolve, reject) { 
-                    console.log('in promise code'); 
-                    setTimeout(function () { 
-                        reject('OK too! yes go....'); 
-                    }, 5000); 
-                }); 
-                return p; 
-            }
-            doAsync9b().then(
-                function(value){console.log('fulfilled....' + value);},
-                function(resaon){console.log('rejected 1st then....' + resaon);}
+            let p9b = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    reject('OK too! yes go....'); 
+                }, 3000); 
+            }); 
+
+            Promise.all([p9a, p9b]).then( 
+                function (value) { console.log('Ok both promises done p9a, p9b afer 6 seconds...') }, 
+                function (reason) { console.log('Nope one of the promises (p9a, p9b) rejected...') } 
             );
 
-            // Run all promises with success.
-            Promise.all([doAsync9a, doAsync9b]).then( 
-                function (value) { console.log('Ok') }, 
-                function (reason) { console.log('Nope') }; 
+            // example 10 - ALL promise 1st resloved afer 1sec then 2nd rejected after 7sec 
+            let p10a = new Promise(function (resolve, reject) { 
+               console.log('in promise code'); 
+               setTimeout(function () { 
+                   resolve('OK to go....'); 
+               }, 1000); 
+           });
+
+           let p10b = new Promise(function (resolve, reject) { 
+               console.log('in promise code'); 
+               setTimeout(function () { 
+                   reject('Nope! No go....'); 
+               }, 7000); 
+           }); 
+
+           Promise.all([p10a, p10b]).then( 
+               function (value) { console.log('ALL:Ok both promises done p10a, p10b afer 7 sec...') }, 
+               function (reason) { console.log('ALL:Nope one of the promises (p10a, p10b) rejected after 7sec...') } 
+           );
+
+           // example 11 - ALL promise 1st rejected afer 7sec then 2nd rejected after 10sec 
+           let p11a = new Promise(function (resolve, reject) { 
+              console.log('in promise code'); 
+              setTimeout(function () { 
+                  reject('Nope! No go.....'); 
+              }, 7000); 
+          });
+
+          let p10b = new Promise(function (resolve, reject) { 
+              console.log('in promise code'); 
+              setTimeout(function () { 
+                  resolve('Yes. Ok go....'); 
+              }, 10000); 
+          }); 
+
+          Promise.all([p11a, p11b]).then( 
+              function (value) { console.log('ALL:k both promises done p11a, p11b afer 10 sec...') }, 
+              function (reason) { console.log('ALL:Nope 1st of the promises (p11a, p11b) rejected after 7sec...') } 
+          );
+
+          // example 12 - RACE promise 1st resolved afer 7sec then 2nd resolved after 10sec 
+            let p12a = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('Yes p12a. Ok go.....'); 
+                }, 7000); 
+            });
+
+            let p12b = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('Yes p12b. Ok go....'); 
+                }, 10000); 
+            }); 
+
+            Promise.race([p12a, p12b]).then( 
+                function (value) { console.log('RACE:Ok 1st promises done after 7 sec (p12a, p12b)...') }, 
+                function (reason) { console.log('RACE:Nope promises (p12a, p12b) rejected...') } 
+            );
+
+            // example 13 - RACE promise 1st rejected afer 7sec then 2nd resolved after 10sec 
+            let p13a = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    reject('Nope p13a. On go.....'); 
+                }, 7000); 
+            });
+
+            let p13b = new Promise(function (resolve, reject) { 
+                console.log('in promise code'); 
+                setTimeout(function () { 
+                    resolve('Yes p13b. Ok go....'); 
+                }, 10000); 
+            }); 
+
+            Promise.race([p13a, p13b]).then( 
+                function (value) { console.log('RACE:promises resolved after 10 sec (p13a, p13b)...') }, 
+                function (reason) { console.log('RACE:Nope 1st promises rejected after 7 sec (p13a, p13b)...') } 
             );
 
             </code></pre>
@@ -2028,10 +2187,213 @@
             <b>example 6 immediate : in promise code - after 5 seconds setTimout : fulfilled...undefined.... Not sure why????<br>
             <b>example 6 immediate : in promise code - after 5 seconds setTimout : Really...undefined.... Not sure why???? <br>
             <b>example 7 immediate : in promise code - after 5 seconds setTimout : Ok: resolve called in pormise... <br>
-            <b>example 8 immediate : in promise code - after 5 seconds setTimout : Nope: reject called in pormise...`;
+            <b>example 8 immediate : in promise code - after 5 seconds setTimout : Nope: reject called in pormise...<br>
+            <b>example 9 immediate : in promise code - after 6 seconds setTimout : ALL:Ok both promises done p9a, p9b afer 6 seconds...<br>
+            <b>example 10 immediate : in promise code - after 7 seconds setTimout : ALL:Nope one of the promises (p10a, p10b) rejected after 7sec...<br>
+            <b>example 11 immediate : in promise code - after 7 seconds setTimout : ALL:Nope one of the promises (p11a, p11b) rejected after 7sec...<br>
+            <b>example 12 immediate : in promise code - after 7 seconds setTimout : RACE:Ok 1st promises done after 7 sec (p12a, p12b)...<br>
+            <b>example 13 immediate : in promise code - after 7 seconds setTimout : RACE:Nope 1st promises rejected after 7 sec (p13a, p13b))...`;
             $(DEFAULT).append(newLocal);
 
-        };
+        },
+        arrays  = () => {
+            // example 1 - setting values in array not working in ES5
+            let salaries1 = Array(90000); 
+            console.log(salaries1.length);
+
+            // example 2 - New way of setting values.
+            let salaries2 = Array.of(90000); 
+            console.log(salaries2.length);
+
+            // example 3 - Increase all items in array by 100.
+            let amounts = [800, 810, 820]; 
+            let salaries3 = Array.from(amounts, v => v + 100 ); 
+            console.log(salaries3);
+
+            // Example 4 - Increase all by 50 using this key word.
+            let amounts4 = [800, 810, 820]; 
+            let salaries4 = Array.from(amounts4, function (v) { 
+                    return v + this.adjustment; 
+                }, { adjustment: 50 }
+            ); 
+            console.log(salaries4);
+
+            // Example 5 - fill whole array with a value.
+            let salaries5 = [600, 700, 800]; 
+            salaries5.fill(900); 
+            console.log(salaries5);
+
+            // Example 6 - Change all value from index 1 inclusive
+            let salaries6 = [600, 700, 800]; 
+            salaries6.fill(900, 1); 
+            console.log(salaries6);
+
+            // Example 7 - Start changing from index 1 to 2 exclusive
+            let salaries7 = [600, 700, 800]; 
+            salaries7.fill(900, 1, 2); 
+            console.log(salaries7);
+
+            // Example 8 - Change value at the end of the array.
+            let salaries8 = [600, 700, 800]; 
+            salaries8.fill(900, -1); 
+            console.log(salaries8);
+
+            // Example 9 - find
+            let salaries9 = [600, 700, 800]; 
+            let result9 = salaries9.find(value => value >= 750); 
+            console.log(result9);            
+            
+            // Example 10 - Find returns the first value found.
+            let salaries10 = [600, 700, 800]; 
+            let result10 = salaries10.find(value => value >= 650); 
+            console.log(result10);
+
+            // Example 11 - Find the index where the value is 700
+            let salaries11 = [600, 700, 800]; 
+            let result11 = salaries11.findIndex(function (value, index, array) { 
+                return value == this; 
+                }, 700
+            ); 
+            console.log(result11);
+
+            // Example 12 - Copy array into array.
+            let salaries12 = [600, 700, 800, 900]; 
+            salaries12.copyWithin(2, 0); 
+            console.log(salaries12);
+
+            // Example 13 - Copy array into array.
+            let ids13 = [1, 2, 3, 4, 5, 6, 7]; 
+            ids13.copyWithin(0, 1); 
+            console.log(ids13);
+
+            // Example 14 - Copy array into array with more control.
+            let ids14 = [1, 2, 3, 4, 5]; 
+            ids14.copyWithin(3, 0, 2); 
+            console.log(ids14);
+
+            // Example 15 - Spread used to get values
+            let ids15 = ['A', 'B','C']; 
+            console.log(...ids15.entries());
+
+            // Example 16 - Spread used to get keys
+            let ids16 =['A', 'B','C']; 
+            console.log(...ids16.keys());
+
+            // Example 16 - Spread used to get values
+            let ids17 =['A', 'B','C']; 
+            console.log(...ids17.values());
+
+            const newLocal = `<div class="a"><h2>arrays</h2>  
+            <pre><code class="language-javascript">
+            // example 1 - setting values in array not working in ES5
+            let salaries1 = Array(90000); 
+            console.log(salaries1.length);
+
+            // example 2 - New way of setting values.
+            let salaries2 = Array.of(90000); 
+            console.log(salaries2.length);
+
+            // example 3 - Increase all items in array by 100.
+            let amounts = [800, 810, 820]; 
+            let salaries3 = Array.from(amounts, v => v + 100 ); 
+            console.log(salaries3);
+
+            // Example 4 - Increase all by 50 using this key word.
+            let amounts4 = [800, 810, 820]; 
+            let salaries4 = Array.from(amounts4, function (v) { 
+                    return v + this.adjustment; 
+                }, { adjustment: 50 }
+            ); 
+            console.log(salaries4);
+
+            // Example 5 - fill whole array with a value.
+            let salaries5 = [600, 700, 800]; 
+            salaries5.fill(900); 
+            console.log(salaries5)
+
+            // Example 6 - Change all value from index 1 inclusive
+            let salaries6 = [600, 700, 800]; 
+            salaries6.fill(900, 1); 
+            console.log(salaries6);
+
+            // Example 7 - Start changing from index 1 to 2 exclusive
+            let salaries7 = [600, 700, 800]; 
+            salaries7.fill(900, 1, 2); 
+            console.log(salaries7);
+
+            // Example 8 - Change value at the end of the array.
+            let salaries8 = [600, 700, 800]; 
+            salaries8.fill(900, -1); 
+            console.log(salaries8);
+
+            // Example 9 - find
+            let salaries9 = [600, 700, 800]; 
+            let result9 = salaries9.find(value => value >= 750); 
+            console.log(result9);
+
+            // Example 10 - Find returns the first value found.
+            let salaries10 = [600, 700, 800]; 
+            let result10 = salaries10.find(value => value >= 650); 
+            console.log(result10);
+
+            // Example 11 - Find the index where the value is 700
+            let salaries11 = [600, 700, 800]; 
+            let result11 = salaries11.findIndex(function (value, index, array) { 
+                return value == this; 
+                }, 700
+            ); 
+            console.log(result11);
+            
+            // Example 12 - Copy array into array.
+            let salaries12 = [600, 700, 800, 900]; 
+            salaries12.copyWithin(2, 0); 
+            console.log(salaries12);
+
+            // Example 13 - Copy array into array.
+            let ids13 = [1, 2, 3, 4, 5, 6, 7]; 
+            ids13.copyWithin(0, 1); 
+            console.log(ids13);
+
+            // Example 14 - Copy array into array with more control.
+            let ids14 = [1, 2, 3, 4, 5]; 
+            ids14.copyWithin(3, 0, 2); 
+            console.log(ids14);
+
+            // Example 15 - Spread used to get entries NOT values
+            let ids15 = ['A', 'B','C']; 
+            console.log(...ids15.entries());
+
+            // Example 16 - Spread used to get keys
+            let ids16 =['A', 'B','C']; 
+            console.log(...ids16.keys());
+
+            // Example 16 - Spread used to get values
+            let ids17 =['A', 'B','C']; 
+            console.log(...ids17.values());
+
+            </code></pre>
+            <b>example 1 salaries1.length = ${salaries1.length}</br>
+            <b>example 2 salaries2.length = ${salaries2.length}<br>
+            <b>example 3 salaries3 = ${JSON.stringify(salaries3, null, 2)}<br>
+            <b>example 4 salaries4 = ${JSON.stringify(salaries4, null, 2)}<br>
+            <b>example 5 salaries5 = ${JSON.stringify(salaries5, null, 2)}<br>
+            <b>example 6 salaries6 = ${JSON.stringify(salaries6, null, 2)}<br>
+            <b>example 7 salaries7 = ${JSON.stringify(salaries7, null, 2)}<br>
+            <b>example 8 salaries8 = ${JSON.stringify(salaries8, null, 2)}<br>
+            <b>example 9 result9 = ${JSON.stringify(result9, null, 2)}<br>
+            <b>example 10 result10 = ${JSON.stringify(result10, null, 2)}<br>
+            <b>example 11 result11 = ${JSON.stringify(result11, null, 2)}<br>
+            <b>example 12 salaries12 = ${JSON.stringify(salaries12, null, 2)}<br>
+            <b>example 13 ids13 = ${JSON.stringify(ids13, null, 2)}<br>
+            <b>example 14 ids14 = ${JSON.stringify(ids14, null, 2)}<br>
+            <b>example 15 ...ids15.entries() = ${JSON.stringify([...ids15.entries()], null, 2)}<br>
+            <b>example 16 ...ids16.keys() = ${JSON.stringify([...ids16.keys()], null, 2)}<br>
+            <b>example 17 ...ids17.values() = ${JSON.stringify([...ids17.values()], null, 2)}`;
+            $(DEFAULT).append(newLocal);
+
+        }
+
+        ;
 
         
                
@@ -2085,7 +2447,8 @@
             numberExtensions,
             iteratorSyntax1,
             generators,
-            promises
+            promises,
+            arrays
         };
     };
 
