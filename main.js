@@ -119,7 +119,7 @@ myIteratorExamples.iteratorWithSpreadOp();
 var myGeneratorExamples = new GeneratorExamples('body #codeExamples');
 myGeneratorExamples.simpleUse();
 myGeneratorExamples.indefiniteGenerator();
-
+// note - using prototype pattern
 var myGeneratorYieldExamples = new GeneratorYieldExamples('body #codeExamples');
 myGeneratorYieldExamples.yieldValuePassedIn();
 myGeneratorYieldExamples.yieldNumber();
