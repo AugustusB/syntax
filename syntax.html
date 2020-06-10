@@ -17,7 +17,7 @@
     <div class="container-fluid mt-5 top">
 
         
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-info" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light" id="mainNav">
             <div class="container-fluid">
                 <a class="navbar-brand js-scroll-trigger" href="#top">
                     <img src="img/jsNavBarMenu.png" width="30" height="30" class="d-inline-block align-top" alt="ES6">
@@ -73,8 +73,22 @@
    
     
 
-        <section>   
-
+        <section id="codeExamples">   
+                <!-- <div class="a"><h2 class="h2">Iterator</h2><h4 class="h4"> Example 1 - What is the typeof Symbol.iterator </h4>  
+                    <pre ><code class="language-javascript float-left"">
+                    
+                    let ids=[9000,9001,9002];
+                    console.log(typeof ids[Symbol.iterator] );
+                    </pre></code>
+                    <aside class="text-info bg-light">
+                        <cite title="Results">Result - </cite>&#9632; typeof ids[Symbol.iterator]  :  ${typeof ids[Symbol.iterator]} &#9632;
+                    </aside>
+                    <pre><code class="language-javascript">
+                    // using iterator
+                    let it = ids[Symbol.iterator]();
+                    console.log(it.next());
+        
+                </div> -->
         </section>
  
         <footer class="bg-dark py-1 text-light text-center p-1">
@@ -102,71 +116,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>  
-    <script src="Scripts/syntax.js"></script>
-    <script>
-        $(function(){
-            'use strict'
-            var syn = new Gus.ES6.ES6Obj();
-            let productId ;
-            syn.syntaxSample('body', productId);
-
-            var field = 'dynamicfield';
-            var price = 5.99;
-            var productView = {
-                [field + '001'] : price 
-            };
-            console.log(productView);
-            syn.showCategories(123,'search','advertising');
-            syn.spreadOpperator1();
-            syn.spreadOpperator2([12,20,18])
-            syn.spreadOpperator3([,,]);
-            syn.spreadOpperator4("43210");
-            syn.objectLiteral1();
-            syn.objectLiteral2();
-            syn.objectLiteral3This();
-            syn.objectLiteral4();
-            syn.objectLiteral5();
-            syn.objectLiteral6();
-            syn.objectLiteral7();
-            syn.objectLiteral8();
-            syn.destructor1();
-            syn.destructor2();
-            syn.destructor3();
-            syn.destructor4();
-            syn.destructorDefault5();
-            syn.destructorNestedArrays6();
-            syn.destructorVariable7();
-            syn.destructorFrunctionPara8();
-            syn.destructorObject9();
-            syn.destructorObject10();
-            syn.destructorObject11();
-            syn.advDestructorObject12();
-            syn.advForDestructorObject13();
-            syn.advThrowDestructorObject14();
-            syn.advDestructorObject15();
-            syn.destructorObject16();
-            syn.classes1();
-            syn.classes2();
-            syn.classesMethods3();
-            syn.classesExpression4();
-            syn.classesExtends5();
-            syn.classesObjectLiteral6();
-            syn.classesStaticFunctions7();
-            syn.classesTarget8();
-            syn.symbolSyntax();
-            syn.symbolSyntax1();
-            syn.symbolSyntax2();
-            syn.objectSetPrototypeOf();
-            syn.objectis();
-            syn.stringExtensions();
-            syn.stringExtensionsImogi();
-            syn.numberExtensions();
-            syn.iteratorSyntax1();
-            syn.generators();
-            syn.promises();
-            syn.arrays();
-
-        });
-    </script> 
+    <script type="module" src="main.js"></script>
 </body>
 </html>

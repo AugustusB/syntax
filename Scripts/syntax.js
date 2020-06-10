@@ -1,275 +1,832 @@
 (function(ns1, ns2){
     'use strict'
     ns2.ES6Obj = function ES6Obj(){
+        this.codeRunning = "in ES6Obj";
         // Private methods //testing changes 
-        const DEFAULT = 'body';
-        var mySyntaxSample = function mySyntaxSample(findElem, productId){
+        const DEFAULT = 'body #codeExamples';
+        var mySyntaxSample = () => {
+            let findElem = 'body';
 
-            $(findElem).append('<div> Hoisting *** ' + productId + '</div>');
+            // Example 1 - Is not hoisted.
+            let err1 = undefined;
+            try {
+                console.log(productId1);
+                let productId1 = 12;
+            } catch (error) {
+                err1 = error;
+            }
+            console.log(`let is not hoisted err1.message: ${err1.message}`)
+            const newLocal1 = `<section><h2 class="h2">LET</h2><h4 class="h4">Example 1 - Is not hoisted.</h4>  
+            <pre>
+            <code class="language-javascript">
+            let err1 = undefined;
+            try {
+                console.log(productId2);
+                let productId1 = 12;
+            } catch (error) {
+                err1 = error;
+            }
+            console.log(\`let is not hoisted err1.message: \${err1.message}\`)
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; let is not hoisted err1.message: ${err1.message} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal1); 
+
+            // Exampe 2 - Can be block scoped.
             let productId2 = 12;
             {
                 let productId2 = 2000;
             }
-            $(findElem).append('<div> Let Block scoping productId2 *** ' + productId2 + '</div>');
-            
+            console.log(`let is block scoded  : ${productId2}`);
+            const newLocal2 = `<section><h4 class="h4">Example 2 - Can be block scoped.</h4>  
+            <pre>
+            <code class="language-javascript">
+            let productId2 = 12
+            {
+                let productId2 = 2000;
+            }
+            console
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; let is block scoded : ${productId2} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal2); 
+
+            // Example 3 - let is scoped to the block and cannot be referenced outside
+            let err3 = undefined;
             try {
                 {
                     let productId3 = 12
                 }
-                $(findElem).append('<div> Let Outside scope block productId3 *** ' + productId3 + '</div>');
+                console.log(productId3)
             } catch (error) {
-                $(findElem).append('<div> Let Outside scope block productId3 *** ' + error.message + '</div>');
+                err3 = error;
+                console.log(err3.message);
             }
+            const newLocal3 = `<section><h4 class="h4">Example 3 - let is scoped to the block and cannot be referenced outside</h4>  
+            <pre>
+            <code class="language-javascript">
+            let err3 = undefined;
+            try {
+                {
+                    let productId3 = 12
+                }
+                console.log(productId3)
+            } catch (error) {
+                err3 = error;
+                console.log(err3.message);
+            }
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; let variables cannot be referenced outside scope err3.message : ${err3.message} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal3); 
 
+            // Examdple 4 - productId4 is in The Temporal Dead zone in function
+            function updateProductId (){
+                productId4 = 12
+            };5
+            let productId4 = null;
+            updateProductId();
+            console.log(`The Temporal Dead Zone in function, productId4 : ${productId4}`);
+
+            const newLocal4 = `<section><h4 class="h4">Example 4 - productId4 is in The Temporal Dead zone in function</h4>  
+            <pre>
+            <code class="language-javascript">
             function updateProductId (){
                 productId4 = 12
             };
             let productId4 = null;
             updateProductId();
-            $(findElem).append('<div> Let Scope block productId4 *** ' + productId4 + '</div>');
+            console.log(productId4)
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; The Temporal Dead Zone in function, productId4 : ${productId4} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal4); 
 
-            // Closure sample issue with for 
-            var updateProd = [];
+            // Example 5 - Closure sample issue with for statement 
+            var updateProd5 = [];
             for (var index = 0; index < 2; index++) {
-                updateProd.push(function () {return index;});
+                updateProd5.push(function () {return index;});
             }
-            $(findElem).append('<div> Let Scope block updateProd[0]() *** ' + updateProd[0]() + ' updateProd[0]() - ' + updateProd[1]() + '</div>');
+            console.log(`closure issue with for statement, updateProd5[0](): ${updateProd5[0]()},  updateProd5[1](): ${updateProd5[1]()}`)
+            const newLocal5 = `<section><h4 class="h4">Example 5 - Closure sample issue with for statement </h4>  
+            <pre>
+            <code class="language-javascript">
+            var updateProd5 = [];
+            for (var index = 0; index < 2; index++) {
+                updateProd5.push(function () {return index;});
+            }
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; closure issue with for statement  updateProd5[0](): ${updateProd5[0]()},  updateProd5[1](): ${updateProd5[1]()}&#9632
+            </aside>`;
+            $(DEFAULT).append(newLocal5); 
 
             // working with const
             const MARK_PCT = 100;
-            $(findElem).append('<div> const MARK_PCT *** ' + MARK_PCT + '</div>');
+            console.log(`Result - const MARK_PCT : ${MARK_PCT}`)
+
+            const newLocal1Constant = `<section><h2 class="h2">Constant</h2><h4 class="h4">Example 1 - Declaration.</h4>  
+            <pre>
+            <code class="language-javascript">
+            const MARK_PCT = 100;
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; const MARK_PCT : ${MARK_PCT} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal1Constant); 
+
 
             if(MARK_PCT > 0){
                 const MARK_PCT = 10;
             }
-            $(findElem).append('<div> const has block scope MARK_PCT *** ' + MARK_PCT + '</div>');
+            console.log(`Result - const has block scope MARK_PCT : ${MARK_PCT}`);
 
-            // Arrow functions 
-            $(findElem).append('<div><h4> Two Document click events attached with arrow function notation</h4></div>');
-
-            var arrowfunc1 = (count, tax) => count *2 * ( 1+ tax);
-            $(findElem).append('<div>var arrowfunc1 = (count, tax) => count *2 * ( 1+ tax); *** ' + arrowfunc1(10, .01) + '</div>');
-
+            const newLocal2Constant = `<section><h4 class="h4">Example 2 - const has block scope.</h4>  
+            <pre>
+            <code class="language-javascript">
+            const MARK_PCT = 100;
+            if(MARK_PCT > 0){
+                const MARK_PCT = 10;
+            }
+            console.log(\`Result - const has block scope MARK_PCT : \${MARK_PCT}\`);
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; const has block scope MARK_PCT : ${MARK_PCT} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal2Constant); 
+ 
             document.addEventListener('click', function() {
-                $(findElem).append('<div> ES5 this in events *** ' + this + '</div>');
+                console.log(`ES5 this in events :  ${this}` );
             });
 
             document.addEventListener('click',() =>{
-                $(findElem).append('<div> ES6 this in events with arrow functions *** ' + this+ '</div>');
+                console.log(`ES6 this in events with arrow functions : ${this}`);
             } );
+            const newLocal1Arrow = `<section><h2 class="h2">Arrow functions</h2><h4 class="h4">Example 1 - events attached with arrow function notation.</h4>  
+            <pre>
+            <code class="language-javascript">
+            // Arrow functions 
+            document.addEventListener('click', function() {
+                console.log(\`ES5 this in events :  \${this}\` );
+            });
 
-            var number2 = 39.99;
-            var number3 = 49.99;
-            var number4Dynamic = 'number4'
-            
+            document.addEventListener('click',() =>{
+                console.log(\`ES6 this in events with arrow functions : \${this}\`);
+            } );
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                    <cite title="Results">Result - </cite>&#9632; arrow function <br>console.log : ES5 this in events : [object HTMLDocument]
+                    <br>console.log : ES6 this in events with arrow functions : [object Object]
+                    &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal1Arrow); 
+
+            var arrowfunc1 = (count, tax) => count *2 * ( 1+ tax);
+            console.log(`arrowfunc1(10, .01) : ${arrowfunc1(10, .01)}`);
+
+            const newLocal2Arrow = `<section><h4 class="h4">Example 2 - Arrow function.</h4>  
+            <pre>
+            <code class="language-javascript">
+            var arrowfunc1 = (count, tax) => count *2 * ( 1+ tax);
+            console.log(\`arrowfunc1(10, .01) : \${arrowfunc1(10, .01)}\`);
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; arrowfunc1(10, .01) : ${arrowfunc1(10, .01)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal2Arrow); 
+
             var invoice1 = {
-                number2,
                 number : 123,
                 process : function () {
-                    return () => $(findElem).append('<div> invoice1.number *** ' + this.number + '</div>');
-                },
-                process1: function () {
-                    $(findElem).append('<div> invoice1.process1() standard notation *** ' + this.number + '</div>');
-                },
-                process2() {
-                    $(findElem).append('<div> invoice1.process2() new notation *** ' + this.number2 + '</div>');
-                },
-
-                // Getter and setter
-                get number3 () {return number3;},
-                set number3 (value) {number3 = value;},
-
-                get [number4Dynamic] () {return true;},
-                set [number4Dynamic] (value){} 
-
+                    return this;
+                }
             };
-            invoice1.process()();
-            invoice1.process1();
-            invoice1.process2();
+            console.log(`this is invoice1: ${JSON.stringify(invoice1.process())}`);
 
-            $(findElem).append('<div> standard property names invoice1.get number3 *** ' + invoice1.number3 + '</div>');
-            invoice1.number3 = 99.99;
-            $(findElem).append('<div> standard property names invoice1.set number3 *** ' + invoice1.number3 + '</div>');
-
-            $(findElem).append('<div> dynamic property names invoice1.get number4 *** ' + invoice1.number4 + '</div>');
-           
-            // for of loop
-            var arrayNames = ['bob', 'jim', 'jack'];
-            for(var item of arrayNames){
-                $(findElem).append('<div> for of loop with arrays [\'bob\', \'jim\', \'jack\'] *** ' + item + '</div>');
+            const newLocal3Arrow = `<section><h4 class="h4">Example3 - None arrow function and this is invoice1.</h4>  
+            <pre>
+            <code class="language-javascript">
+            var invoice1 = {
+                number : 123,
+                process : function () {
+                    return this;
+                }
             };
-            var str = 'ABCD';
-            for(var item of str){
-                $(findElem).append('<div> for of loop with string \'ABCD\' *** ' + item + '</div>');
+            console.log(\`this is invoice1: \${JSON.stringify(invoice1.process())}\`);
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; this : ${JSON.stringify(invoice1.process())} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal3Arrow);
+
+            var invoice2 = {
+                number : 123,
+                process : () => {
+                    return this;
+                }
             };
-            var octNumber = 0o10;
-            $(findElem).append('<div> octals 0o10 or 0O10 *** ' + octNumber + '</div>');
+            console.log(`this is set to the context of the code we are running: ${JSON.stringify(invoice2.process())}`);
+            const newLocal4Arrow = `<section><h4 class="h4">Example4 - Arrow function and this is set to the context of the code we are running.</h4>  
+            <pre>
+            <code class="language-javascript">
+            var invoice2 = {
+                number : 123,
+                process : () => {
+                    return this;
+                }
+            };
+            console.log(\`this is Window: \${JSON.stringify(invoice2.process())}\`);
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; this is set to the context of the code we are running: ${JSON.stringify(invoice2.process())} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal4Arrow);
 
-            var invoiceNum = 1350;
-            $(findElem).append(`<div> template literals using \` $\{\}\`*** ${invoiceNum}</div>`);
+            var invoice3 = {
+                number : 123,
+                process : function () {
+                    return () => this;
+                }
+            }
+            console.log(`this is: ${JSON.stringify(invoice3.process()())}`);
+            const newLocal5Arrow = `<section><h4 class="h4">Example5 - Arrow function and this.</h4>  
+            <pre>
+            <code class="language-javascript">
+            var invoice3 = {
+                number : 123,
+                process : function () {
+                    return () => this;
+                }
+            };
+            console.log(\`this is: \${JSON.stringify(invoice3.process()())}\`);
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; this is: ${JSON.stringify(invoice3.process()())} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal5Arrow);
 
+            var invoice4 = {
+                number : 123,
+                process : function () {
+                    return () => this;
+                }
+            }
+            var invoice5 = {
+                number : 456                
+            };
+
+            invoice4.process().bind(invoice5)();
+            console.log(`this is: ${JSON.stringify(invoice4.process().bind(invoice5)())}`);
+            const newLocal6Arrow = `<section><h4 class="h4">Example6 - Arrow function does not support bind.</h4>  
+            <pre>
+            <code class="language-javascript">
+            var invoice4 = {
+                number : 123,
+                process : function () {
+                    return () => this;
+                }
+            };
+            var invoice5 = {
+                number : 456                
+            };
+
+            invoice4.process().bind(invoice5);
+            console.log(\`this is: \${JSON.stringify(invoice4.process().bind(invoice5)())}\`);
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; this is: ${JSON.stringify(invoice4.process().bind(invoice5)())} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal6Arrow);
+
+            
+            var invoice6 = {
+                number : 123,
+                process : function () {
+                    return () => this;
+                }
+            }
+            var invoice7 = {
+                number : 456                
+            };
+
+            invoice6.process().call(invoice7);
+            console.log(`this is: ${JSON.stringify(invoice6.process().call(invoice7))}`);
+            const newLocal7Arrow = `<section><h4 class="h4">Example7 - Arrow function does not support call or apply.</h4>  
+            <pre>
+            <code class="language-javascript">
+            var invoice6 = {
+                number : 123,
+                process : function () {
+                    return () => this;
+                }
+            };
+            var invoice7 = {
+                number : 456                
+            };
+
+            invoice4.process().call(invoice5);
+            console.log(\`this is: \${JSON.stringify(invoice6.process().call(invoice7)}\`);
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; this is: ${JSON.stringify(invoice6.process().call(invoice7))} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal7Arrow);
+            
+            var getInvoice = () => 123;
+            var getInvoice1 = {
+                number: 123,
+                getNumberI: () => this.number
+            };
+            
+            console.log(`getInvoice.hasOwnProperty(\'prototype\'): ${getInvoice.hasOwnProperty('prototype')}`);
+            console.log(`getInvoice1.hasOwnProperty(\'number\'): ${getInvoice1.hasOwnProperty('number')}`);
+            console.log(`getInvoice1.hasOwnProperty('getNumber'): ${getInvoice1.hasOwnProperty('getNumber')}`);
+
+            const newLocal8Arrow = `<section><h4 class="h4">Example8 - Arrow function does not have access to prototype.</h4>  
+            <pre>
+            <code class="language-javascript">
+            var getInvoice = () => 123;
+            var getInvoice1 = {
+                number: 123,
+                getNumberI: () => this.number
+            };
+            console.log(\`getInvoice.hasOwnProperty('prototype'): \${getInvoice.hasOwnProperty('prototype')}\`);
+            console.log(\`getInvoice1.hasOwnProperty('number'): \${getInvoice1.hasOwnProperty('number')}\`);
+            console.log(\`getInvoice1.hasOwnProperty('getNumber'): \${getInvoice1.hasOwnProperty('getNumber')}\`);
+            </code>
+            </pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getInvoice.hasOwnProperty('prototype'): ${getInvoice.hasOwnProperty('prototype')} &#9632;
+                    <br>&#9632; getInvoice1.hasOwnProperty('number'): ${getInvoice1.hasOwnProperty('number')} &#9632;
+                    <br>&#9632; getInvoice1.hasOwnProperty('getNumber'): ${getInvoice1.hasOwnProperty('getNumber')} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal8Arrow);
+            
+        },
+
+        defaultsFunctionParam1 = () => {
+            var getProduct = (productId = 10001) => productId;
+            console.log(`getProduct(): ${getProduct()}`);
+            const newLocal = `<section><h2 class="h2">Default Function Parameters</h2><h4 class="h4">Example 1 - No arguments passed to function </h4>  
+            <pre><code class="language-javascript">
+
+            var getProduct = (productId = 10001) => productId;
+            console.log(\`getProduct(): \${getProduct()}\`);
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getProduct(): ${getProduct()} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
         },
         
-        showCategories = function showCategories(productId,...categories){
-            console.log(categories instanceof Array);
-            $(DEFAULT).append(`<div class="a">  <h3> REST opperator </h3> function showCategories(productId,...categories) \` $\{categories instanceof Array\}\` : ${categories instanceof Array}</div>`);
-            
+        defaultsFunctionParam2 = () =>{
+            var getPoduct = (productId = 10001, type = 'software') => `${productId}, ${type}`;
+            console.log(`getPoduct(undefined, 'hardware'): ${getPoduct(undefined, 'hardware')}`)
 
-        },
-        spreadOpperator1 = () => {
-            var prices=[12,20,18];
-            var maxPrice=Math.max(...prices);
-            console.log(maxPrice);
-            const newLocal = `<div class="a"> <h2> Spread opperator </h2><h4> Example 1 </h4>
+            const newLocal = `<section><h4 class="h4">Example 2 - Arguments undefined passed to function </h4>  
             <pre><code class="language-javascript">
-            var prices=[12,20,18];
-            var maxPrice=Math.max(...prices);
-            console.log(maxPrice);
+
+            var getPoduct = (productId = 10001, type = 'software') => \`\${productId}, \${type}\`;
+            console.log(\`getPoduct(undefined, 'hardware'): \${getPoduct(undefined, 'hardware')}\`)
+
             </code></pre>
-            <b>maxPrice ${maxPrice}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getPoduct(undefined, 'hardware'): ${getPoduct(undefined, 'hardware')} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
         },
-        spreadOpperator2 = (prices) => {
-            const newLocal_1 = `<div class="a"> <h4> Example 2 </h4>
-            <pre><code class="language-javascript">      
-            varprices=[12,20,18];
-            varnewPriceArray=[...prices];
-            console.log(newPriceArray);
+        
+        defaultsFunctionParam3 = () =>{
+            var getTotal = (price , tax = price * 0.07) => price + tax;
+            console.log(`getTotal(5.00): ${getTotal(5.00)}`)
+
+            const newLocal = `<section><h4 class="h4">Example 3 - Arguments passed to function used in default</h4>  
+            <pre><code class="language-javascript">
+
+            var getTotal = (price , tax = price * 0.07) => price + tax;
+            console.log(\`getTotal(5.00): \${getTotal(5.00)}\`)
+
             </code></pre>
-            </div>`;
-            $(DEFAULT).append(newLocal_1);
-           for (var arr of [...prices]) {
-                $(DEFAULT).append(`<div> <b>Array Item : ${arr}</div>`) 
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getTotal(5.00): ${getTotal(5.00)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+        
+        defaultsFunctionParam4 = () =>{
+            var getPoduct = (productId = 10001, type = 'software') => `${productId}, ${type}`;
+            console.log(`getPoduct(undefined, 'hardware'): ${getPoduct(undefined, 'hardware')}`)
+
+            const newLocal = `<section><h4 class="h4">Example 4 - Arguments undefined passed to function </h4>  
+            <pre><code class="language-javascript">
+
+            var getPoduct = (productId = 10001, type = 'software') => \`\${productId}, \${type}\`;
+            console.log(\`getPoduct(undefined, 'hardware'): \${getPoduct(undefined, 'hardware')}\`)
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getPoduct(undefined, 'hardware'): ${getPoduct(undefined, 'hardware')} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+
+        defaultsFunctionParam5 = () =>{
+            var baseRate = 0.07;
+            var getTotal = (price , tax = price * baseRate) => price + tax;
+            console.log(`getTotal(5.00): ${getTotal(5.00)}`)
+
+            const newLocal = `<section><h4 class="h4">Example 5 - Arguments passed to function with outside variables</h4>  
+            <pre><code class="language-javascript">
+
+            var baseRate = 0.07;
+            var getTotal = (price , tax = price * baseRate) => price + tax;
+            console.log(\`getTotal(5.00): \${getTotal(5.00)}\`)
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getTotal(5.00): ${getTotal(5.00)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+
+        defaultsFunctionParam6 = () =>{
+            var getBaseRate = () => 0.07;
+            var getTotal = (price , tax = price * getBaseRate()) => price + tax;
+            console.log(`getTotal(5.00): ${getTotal(5.00)}`)
+
+            const newLocal = `<section><h4 class="h4">Example 6 - Arguments passed to function with outside functions</h4>  
+            <pre><code class="language-javascript">
+
+            var getBaseRate = () => 0.07;
+            var getTotal = (price , tax = price * getBaseRate()) => price + tax;
+            console.log(\`getTotal(5.00): \${getTotal(5.00)}\`)
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getTotal(5.00): ${getTotal(5.00)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+
+        defaultsFunctionParam7 = () =>{
+            try {
+                var getTotal = (price = adjustment, adjustment = 1.00) => price + adjustment;
+                console.log(`getTotal(): ${getTotal()}`);
+
+            } catch (error) {
+                const newLocal = `<section><h4 class="h4">Example 7 - Variable not declared before use in function parameter</h4>  
+                <pre><code class="language-javascript">
+    
+                var getTotal = (price = adjustment, adjustment = 1.00) => price + adjustment;
+                console.log(\`getTotal(): \${getTotal()}\`)
+    
+                </code></pre>
+                </section>
+                <aside class="text-info bg-light mb-3">
+                    <cite title="Results">Result - </cite>&#9632; getTotal(): ${error.message} &#9632;
+                </aside>`;
+                $(DEFAULT).append(newLocal);    
             }
+            
+        },
+
+        defaultsFunctionParam8 = () =>{
+            var getTotal = new Function('price = 20.00', 'return price');
+            console.log(`getTotal(): ${getTotal()}`);
+
+            const newLocal = `<section><h4 class="h4">Example 8 - Default parameters work in dynamic functions</h4>  
+            <pre><code class="language-javascript">
+
+            var getTotal = new Function('price = 20.00', 'return price');
+            console.log(\`getTotal(): \${getTotal()}\`)
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getTotal(): ${getTotal()} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);    
+        },
+
+        rest1 = () => {
+            var showCategories = (productId, ...categories) => categories
+            var showCategoriesArray = showCategories(123, 'search', 'advertising');
+            console.log(`showCategoriesArray instanceof Array: ${showCategoriesArray instanceof Array}`);
+            console.log(`showCategoriesArray : ${JSON.stringify(showCategoriesArray)}`);
+
+            const newLocal = `<section><h2 class="h2">Rest</h2><h4 class="h4">Example 1 - Rest gathers up rest of the argument into an array </h4>   
+            <pre><code class="language-javascript">
+
+            var showCategories = (productId, ...categories) => categories
+            var showCategoriesArray = showCategories(123, 'search', 'advertising');
+            
+            console.log(showCategoriesArray instanceof Array: \${showCategoriesArray instanceof Array});
+            console.log(showCategoriesArray : \${JSON.stringify(showCategoriesArray)});
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; showCategoriesArray instanceof Array: ${showCategoriesArray instanceof Array} &#9632;
+                <br>&#9632; console.log(showCategoriesArray : ${JSON.stringify(showCategoriesArray)});&#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal); 
+        
+        },
+        rest2 = () => {
+            var showCategories = (productId, ...categories) => categories
+            var showCategoriesEmptyArray = showCategories(123);
+            console.log(`showCategoriesEmptyArray instanceof Array: ${showCategoriesEmptyArray instanceof Array}`);
+            console.log(`showCategoriesEmptyArray : ${JSON.stringify(showCategoriesEmptyArray)}`);
+
+            const newLocal = `<section><h4 class="h4">Example 2 - Rest gathers up rest of the argument into an empty array </h4>   
+            <pre><code class="language-javascript">
+
+            var showCategories = (productId, ...categories) => categories
+            var showCategoriesEmptyArray = showCategories(123);
+            
+            console.log(showCategoriesEmptyArray instanceof Array: \${showCategoriesEmptyArray instanceof Array});
+            console.log(showCategoriesEmptyArray : \${JSON.stringify(showCategoriesEmptyArray)});
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; showCategoriesEmptyArray instanceof Array: ${showCategoriesEmptyArray instanceof Array} &#9632;
+                <br>&#9632; console.log(showCategoriesEmptyArray : ${JSON.stringify(showCategoriesEmptyArray)});&#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal); 
+        
+        },
+        rest3 = () => {
+            var showCategories = function (productId, ...categories) { return arguments.length;}
+            var argumentLength = showCategories(123, 'search', 'advertising');
+            console.log(`argumentLength : ${argumentLength}`);
+
+            const newLocal = `<section><h4 class="h4">Example 3 - Rest and argument length (Note: arrow functions do not have arguements object) </h4>   
+            <pre><code class="language-javascript">
+
+            var showCategories = function (productId, ...categories) { return arguments.length;}
+            var argumentLength = showCategories(123, 'search', 'advertising');
+            
+            console.log(argumentLength : \${argumentLength});
+
+            </code></pre>
+            </section>
+                <aside class="text-info bg-light mb-3">
+                    <cite title="Results">Result - </cite>&#9632; argumentLength: ${argumentLength} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal); 
+        },
+
+        rest4 = () => {
+            var showCategories = new Function('productId', '...categories',  'return categories;');
+            var categories = showCategories(123, 'search', 'advertising');
+            console.log(`categories : ${JSON.stringify(categories)}`);
+
+            const newLocal = `<section><h4 class="h4">Example 4 - Rest with dynamic functions</h4>   
+            <pre><code class="language-javascript">
+
+            var showCategories = new Function('productId', '...categories',  'return categories;');
+            var argumentLength = showCategories(123, 'search', 'advertising');
+            
+            console.log(categories : \${JSON.stringify(categories)});
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; categories: ${JSON.stringify(categories)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal); 
+        },
+
+        spreadOpperator1 = () => {
+            var getMaxPrice = () =>{
+                var prices=[12,20,18];
+                return Math.max(...prices);
+            }
+            var maxPrice = getMaxPrice();
+            console.log(`getMaxPrice ${maxPrice}`);
+            const newLocal = `<section><h2 class="h2">Spread opperator</h2><h4 class="h4">Example 1 - Spread as a parameter to a function </h4>  
+            <pre><code class="language-javascript">
+
+            var getMaxPrice = () =>{
+                var prices=[12,20,18];
+                return Math.max(...prices);
+            }
+            var maxPrice = getMaxPrice();
+            console.log(\`getMaxPrice(): \${maxPrice}\`);
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getMaxPrice(): ${maxPrice} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+        spreadOpperator2 = () => {
+            var copyArray = () =>{
+                var prices = [12,20,18];
+                return [...prices];
+            }
+            var arr = copyArray();
+            console.log(`copyArray(): ${JSON.stringify(arr)}`);
+            const newLocal = `<section><h4 class="h4"> Example 2 - assign spread to a variable to create new array</h4>
+            <pre><code class="language-javascript">      
+            var copyArray = () =>{
+                var prices = [12,20,18];
+                return [...prices];
+            }
+            var arr = copyArray();
+            console.log(\`copyArray(): \${SON.stringify(arr)}\`);
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; copyArray(): ${JSON.stringify(arr)} &#9632;
+            </aside>`;;
+            $(DEFAULT).append(newLocal);
         },
         spreadOpperator3 = (prices) => {
-            const newLocal = `<div class="a"> <h4> Example 3 </h4>
+            var createArray1 = () => Array(...[,,]);
+            console.log(`createArray1(): ${JSON.stringify(createArray1())}`);
+
+            var createArray2 = () => [...[,,]];
+            console.log(`createArray2(): ${JSON.stringify(createArray2())}`);
+
+            var createArray3 = () => ['A', 'B', ...'MNOP', 'E'];
+            console.log(`createArray3(): ${JSON.stringify(createArray3())}`);
+
+            const newLocal = `<section><h4 class="h4"> Example 3 - Using spread operator to create new arrays</h4>
             <pre><code class="language-javascript">      
-            var newPriceArray=Array(...[,,]);
-            console.log(newPriceArray);
+            var createArray1 = () => Array(...[,,]);
+            console.log(\`createArray1(): \${JSON.stringify(createArray1())}\`);
+
+            var createArray2 = () => [...[,,]];
+            console.log(\`createArray2(): \${JSON.stringify(createArray2())}\`);
+
+            var createArray3 = () => ['A', 'B', ...'MNOP', 'E'];
+            console.log(\`createArray3(): \${JSON.stringify(createArray3())}\`);
             </code></pre>
-            </div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; createArray1(): ${JSON.stringify(createArray1())} &#9632;
+                <br>&#9632; createArray2(): ${JSON.stringify(createArray2())} &#9632;
+                <br>&#9632; createArray3(): ${JSON.stringify(createArray3())} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
-            var i = Array(...prices);
-           for (var arr of Array(...prices)) {
-                $(DEFAULT).append(`<div> <b>Array Item : ${arr}</div>`) 
-            }
         },
-        spreadOpperator4 = (str) => {
-            const newLocal_1 = `<div class="a"> <h4> Example 4 </h4>
-            <pre><code class="language-javascript">    
-            var maxCode=Math.max(..."43210"); 
-            console.log(maxCode);
+        spreadOpperator4 = () => {
+            var getMathMax = () => Math.max(...'78965410')
+            console.log(`getMathMax(): ${getMathMax()}`);
+            const newLocal = `<section><h4 class="h4"> Example 4 - Spread out a string</h4>
+            <pre><code class="language-javascript">      
+            var getMathMax = () => Math.max(...'78965410')
+            console.log(\`getMathMax(): \${getMathMax()}\`);
             </code></pre>
-            <b>Math.max(..."43210") : ${Math.max(...str)}</div>`;
-            $(DEFAULT).append(newLocal_1);
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; getMathMax(): ${getMathMax()} &#9632;
+            </aside>`;;
+            $(DEFAULT).append(newLocal);
         },
-        objectLiteral1 = () =>{
-            var price=5.99,quantity=30; 
-            const newLocal = `<div class="a"> <h2> Object Literals </h2><h4> Example 1 </h4> 
+
+        objectLiteral1 = () => {
+            var price=5.99, quantity=30;
+            var product = {price, quantity};
+            
+            console.log(`product: ${JSON.stringify(product)}`)
+
+            const newLocal = `<section><h2> Object Literals Extensions</h2><h4> Example 1 No need to repeat name of property</h4> 
             <pre><code class="language-javascript">   
-            var price=5.99,
-                quantity=30; 
-            var productView = {
-                price,quantity
-            };
-            console.log(productView);
+            var price=5.99, quantity=30;
+            var product = {price, quantity};
+            
+            console.log(\`product: \${JSON.stringify(product)}\`)
             </code></pre>
-            <b>JSON.stringify({price,quantity}) : ${JSON.stringify({ price, quantity })}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; product: ${JSON.stringify(product)} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
         },
+
         objectLiteral2 = () =>{
-            var price=5.99,quantity=10;
-            var productView={
-                price,
-                quantity,
-                calculateValue(){
-                    return this.price * this.quantity
-                }
-            };
-            console.log(productView.calculateValue()); 
-            const newLocal_1 = `<div class="a"> <h4> Example 2 </h4>
-            <pre><code class="language-javascript">
-            var price=5.99,
-                quantity=10;
-            var productView = {
-                price,
-                quantity,
-                calculateValue(){
-                    return this.price * this.quantity
-                }
-            };
-            console.log(productView.calculateValue());
+            var price=5.99, quantity=30;
+            var productView = 
+                {
+                    price, 
+                    quantity,
+                    calculateValue() {
+                        return this.price * this.quantity
+                    }
+                };
+
+            console.log(`productView.calculateValue(): ${productView.calculateValue()}`)
+
+            const newLocal = `<section><h4> Example 2 New notation adding function to object literals</h4> 
+            <pre><code class="language-javascript">   
+            var price=5.99, quantity=30;
+            var productView = 
+                {
+                    price, 
+                    quantity,
+                    calculateValue() {
+                        return this.price * this.quantity
+                    }
+                };
+            console.log(\`productView.calculateValue(): \${productView.calculateValue()}\`)
             </code></pre>
-            <b>productView.calculateValue()) : ${productView.calculateValue()}</div>`;
-            $(DEFAULT).append(newLocal_1);
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; productView.calculateValue(): ${productView.calculateValue()} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
         }, 
-        objectLiteral3This = () =>{
-            var price=5.99,
-                quantity=10;
-            var productView={
-                price: 7.99,
-                quantity: 1,
-                calculateValue(){
-                    return this.price * this.quantity
-                }
-            };
-            console.log(productView.calculateValue());
-            const newLocal = `<div class="a"> <h4> Example 3 </h4>
-            <pre><code class="language-javascript">
-            var price=5.99,
-                quantity=10;
+
+        objectLiteral3 = () =>{
+            var method='doIt';
             var productView = {
-                price: 7.99,
-                quantity: 1,
-                calculateValue() {
-                    return this.price * this.quantity
+                    [method+"-001"]() {
+                        return "in a method";
+                    }
                 }
-            };
-            console.log(productView.calculateValue());
+            console.log(`productView['doIt-001'](): ${productView['doIt-001']()}`)
+
+            const newLocal = `<section><h4> Example 3 Dynamic properties in object literals</h4> 
+            <pre><code class="language-javascript">   
+            var method='doIt';
+            var productView = {
+                    [method+"-001"]() {
+                        return "in a method";
+                    }
+                }
+            console.log(\`productView['doIt-001'](): \${productView['doIt-001']()}\`)
             </code></pre>
-            <br><b>productView.calculateValue()) : ${productView.calculateValue()}</div>`;
-            $(DEFAULT).append(newLocal );
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; productView['doIt-001']: ${productView['doIt-001']()} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
         }, 
         objectLiteral4 = () =>{
-            var method='doIt'; 
+            var ident='productId';
             var productView={
-                [method+"-001"](){
-                    return "in a method";
-                }
+                get[ident](){return true;},
+                set[ident](value){}
             };
-            productView['doIt-001']();
-            let newLocal = `<div class="a"> <h4> Example 4 </h4>
-            <pre><code class="language-javascript"> 
-            var method='doIt'; 
+            console.log(`productView.productId: ${productView.productId}`);
+            let newLocal = `<section><h4> Example 4 Getters and Setters in object literals</h4> 
+            <pre><code class="language-javascript">   
+            var ident='productId';
             var productView = {
-                [method+"-001"](){retrun "in a method";}
+                get[ident](){return true;},
+                set[ident](value){}
             };
-            productView['doIt-001']();
+            console.log(\`productView.productId: \${productView.productId}\`);
             </code></pre>
-            <br><b>productView['doIt-001'](): ${productView['doIt-001']()}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; productView.productId: ${productView.productId} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
-        }, 
+        },
         objectLiteral5 = () =>{
-            var ident='productId';
-            var productView={
-                get[ident](){return true;},
-                set[ident](value){}
-            };
-            console.log(productView.productId);
-            let newLocal = `<div class="a"> <h4> Example 5 </h4>
-            <pre><code class="language-javascript"> 
-            var ident='productId';
-            var productView = {
-                get[ident](){return true;},
-                set[ident](value){}
-            };
-            console.log(productView.productId);
-            </code></pre>
-            <br><b>productView.productId: ${productView.productId}</div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        objectLiteral6 = () =>{
             var price=5.99,quantity=10; 
             var productView =
             {
@@ -277,8 +834,8 @@
                 quantity,
                 "calculatevalue"(){return this.price*this.quantity} 
             };
-            console.log("calculatevalue :" + productView["calculatevalue"]());
-            const newLocal_1 = `<div class="a"> <h4> Example 6 </h4>
+            console.log(`productView["calculatevalue"]: ${productView["calculatevalue"]()}`);
+            const newLocal = `<section><h4> Example 5 String function name in object literals</h4>
             <pre><code class="language-javascript"> 
             var price=5.99,quantity=10; 
             var productView =
@@ -287,310 +844,489 @@
                 quantity,
                 "calculatevalue"(){return this.price*this.quantity} 
             };
-            console.log("calculatevalue :" + productView["calculatevalue"]());
+            console.log(\`productView["calculatevalue"]: \${productView["calculatevalue"]()}\`);
             </code></pre>
-            <br><b> productView["calculatevalue"](): ${productView["calculatevalue"]()}</div>`;
-            $(DEFAULT).append(newLocal_1);
-
-        },
-        objectLiteral7 = () =>{
-            var field='dynamicField';
-            var price=5.99;
-            var productView={
-                [field]:price
-            };
-            console.log("dynamicField: " + productView['dynamicField']);
-            let newLocal = `<div class="a"> <h4> Example 7 </h4>
-            <pre><code class="language-javascript"> 
-            var field='dynamicField';
-            var price=5.99;
-            var productView = {
-                [field]:price
-            };
-            console.log("dynamicField: " + productView['dynamicField']);
-            </code></pre>
-            <br><b> productView["dynamicField"]: ${productView["dynamicField"]}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; productView["calculatevalue"]: ${productView["calculatevalue"]()} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
 
         },
-        objectLiteral8 = () =>{
-            var ident='productId';
-            var productView = {
-                blnState: true,
-                get[ident](){return this.blnState;},
-                set[ident](value){this.blnState = value;}
-                
-            };
-            console.log('productView.productId: ' + productView.productId);
-            productView.productId = false;
-            console.log('productView.productId: ' + productView.productId);
-            let temp = `<div class="a"> <h4> Example 8 </h4>
-            <pre><code class="language-javascript"> 
-            var ident='productId';
-            var productView = {
-                blnState: true,
-                get[ident](){return this.blnState;},
-                set[ident](value){this.blnState = value;}
-                
-            };
-            console.log('productView.productId: ' + productView.productId);
-            productView.productId = false;
-            console.log('productView.productId: ' + productView.productId);
+
+        forOfLoop = () => {
+            var categories = ['hardware', 'software', 'vapoware'];
+            var cat = () => {
+                var rtn = '';
+                for (const iterator of categories) {
+                    rtn += `${iterator}, `;
+                }
+                return rtn.trim().slice(0, -1);
+            }         
+            console.log(`cat(): ${cat()}`)
+
+            var stringForCount = 'ABCDEFGH'
+            var count = 0;
+            var getCount = () => {
+                for (const iterator of stringForCount) {
+                   count++; 
+                }
+                return count;
+            }
+            var val = getCount();
+
+            console.log(`getCount(): ${val}`);
+
+            const newLocal = `<section><h2>For of loop</h2><h4> Example 1 all for of loop examples</h4> 
+            <pre><code class="language-javascript">   
+            var categories = ['hardware', 'software', 'vapoware'];
+            var cat = () => {
+                var rtn = '';
+                for (const iterator of categories) {
+                    rtn += \`\${iterator}, \`;
+                }
+                return rtn.trim().slice(0, -1);
+            }         
+            console.log(\`cat(): \${cat()}\`)
+
+            var stringForCount = 'ABCDEFGH'
+            var count = 0;
+            var getCount = () => {
+                for (const iterator of stringForCount) {
+                   count++; 
+                }
+                return count;
+            }
+            var val = getCount();
+
+            console.log(\`getCount(): \${val}\`);
+
             </code></pre>
-            <br><b>productView.productId: ${!productView.productId}
-            <br><b>productView.productId: ${productView.productId}</div>`;
-            $(DEFAULT).append(temp);
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; cat(): ${cat()} &#9632;
+                <br>&#9632; getCount(): ${val} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
 
+        octalsAndBinaries = () => {
+            var octalValue = 0o10, binaryValue = 0b10;
+            console.log(`octalValue = ${octalValue}`);
+            console.log(`binaryValue = ${binaryValue}`);
 
-        }, 
+            const newLocal = `<section><h2>Octals and Binary</h2><h4> Example 1 octals and binaries</h4> 
+            <pre><code class="language-javascript">   
+            var octalValue = 0o10, binaryValue = 0b10;
+            console.log(\`octalValue = \${octalValue}\`);
+            console.log(\`binaryValue = \${binaryValue}\`);
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; octalValue: ${octalValue} &#9632;
+                <br>&#9632; binaryValue: ${binaryValue} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+
+        templateLiterals1 = () => {
+            let invoiceNumber = 1350;
+            console.log(`Invoice Number = ${invoiceNumber}`);
+
+            console.log(`Invoice Number ${'INV-' + invoiceNumber}`);
+
+            let message = `A
+            B
+            C`;
+            console.log(message);
+
+            const newLocal = `<section><h2>Templte Literals</h2><h4> Example 1</h4> 
+            <pre><code class="language-javascript">   
+            let invoiceNumber = 1350;
+            console.log(\`Invoice Number = \${invoiceNumber}\`);
+
+            console.log(\`Invoice Number = \${'INV-' + invoiceNumber}\`);
+
+            let message = \`A
+            B
+            C\`;
+            console.log(message);
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; Invoice Number = ${invoiceNumber} &#9632;
+                <br>&#9632; Invoice Number =  ${'INV-' + invoiceNumber} &#9632;
+                <br>&#9632; ${message} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+        
+        templateLiterals2 = () => {
+            var showMessage = (message) => {
+                let invoiceNumber = 99;
+                return message;
+            }
+            let invoiceNumber = 1350;
+            console.log(`showMessage(): ${showMessage(`Invoice Number: ${invoiceNumber}`)}`);
+
+            const newLocal = `<section><h4> Example 2 interpolation before function call</h4> 
+            <pre><code class="language-javascript">   
+            var showMessage = (message) => {
+                let invoiceNumber = 99;
+                return message;
+            }
+            let invoiceNumber = 1350;
+            console.log(\`showMessage(): \${showMessage(\`Invoice Number: \${invoiceNumber}\`)}\`);
+
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; showMessage(): ${showMessage(`Invoice Number: ${invoiceNumber}`)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+
+        templateLiterals3 = () => {
+            var processInvoice = (segments) => segments;
+            var temp = processInvoice `template`;
+            console.log(`temp: ${JSON.stringify(temp)}`);
+
+            const newLocal = `<section><h4> Example 3 Tagged template literal</h4> 
+            <pre><code class="language-javascript">   
+            var processInvoice = (segments) => segments;
+            var temp = processInvoice \`template\`;
+            console.log(\`temp: \${JSON.stringify(temp)}\`);
+
+            </code></pre>
+            <section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; temp: ${JSON.stringify(temp)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+
+        templateLiterals4 = () => {
+            var processInvoice = (segments, ...values) => ({ segments, values });
+            let invoiceNumber = 1350;
+            let amount = 20.99;
+            var temp = processInvoice `Invoice number: ${invoiceNumber} for ${amount}`;
+            console.log(`temp: ${JSON.stringify(temp)}`);
+
+            const newLocal = `<section><h4> Example 4 Tagged template literal more complex</h4> 
+            <pre><code class="language-javascript">   
+            var processInvoice = (segments, ...values) => ({ segments, values });
+            let invoiceNumber = 1350;
+            let amount = 20.99;
+            var temp = processInvoice \`Invoice number: \${invoiceNumber} for ${amount}\`;
+            console.log(\`temp: \${JSON.stringify(temp)}\`);
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; temp: ${JSON.stringify(temp)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+
         destructor1 = () =>{
             let salary = ['32000','50000','75000'];
             let[ low, average, high] = salary;
-            console.log(average); 
-            const newLocal = `<div class="a"> <h2> Destructor </h2><h4> Example 1 </h4> 
+            console.log(`average : ${average}`); 
+            const newLocal = `<section><h2> Destructuring </h2><h4> Example 1 </h4> 
             <pre><code class="language-javascript">   
             let salary = ['32000','50000','75000'];
             let[ low, average, high] = salary;
-            console.log(average);
+            console.log(\`average : \${average}\`);
             </code></pre>
-            <b>average : ${average}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; average : ${average} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
         },
         destructor2 = () => {
             let salary = ['32000','50000'];
-            let [low,average,high] = salary;
-            console.log(high);
-            const newLocal = `<div class="a"><h4> Example 2 </h4> 
+            let [low, average, high] = salary;
+            console.log(`high : ${high}`);
+            const newLocal = `<section><h4> Example 2 </h4> 
             <pre><code class="language-javascript">   
             let salary = ['32000','50000'];
             let [low,average,high] = salary;
-            console.log(high)
+            console.log(\`high : \${high}\`)
             </code></pre>
-            <b>high : ${high}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; high : ${high} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
         },
         destructor3 = () => {
             let salary = ['32000','50000','75000'];
-            let [low,,high] = salary;
-            console.log(high); 
-            const newLocal = `<div class="a"><h4> Example 3 </h4> 
+            let [low, ,high] = salary;
+            console.log(`high : ${high}`); 
+            const newLocal = `<section><h4> Example 3 </h4> 
             <pre><code class="language-javascript">   
             let salary = ['32000','50000','75000'];
             let [low,,high] = salary;
-            console.log(high);
+            console.log(\`high : \${high}\`);
             </code></pre>
-            <b>high : ${high}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; high : ${high} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
         },
         destructor4 = () => {
             let salary=['32000','50000','75000'];
-            let [low,...remaining] = salary;
-            console.log(remaining);
-            const newLocal = `<div class="a"><h4> Example 4 </h4> 
+            let [low, ...remaining] = salary;
+            console.log(`remaining: ${JSON.stringify(remaining)}`);
+            const newLocal = `<section><h4> Example 4 with Rest parameter</h4> 
             <pre><code class="language-javascript">   
             let salary=['32000','50000','75000'];
             let [low,...remaining] = salary;
-            console.log(remaining);
+            console.log(\`remaining: \${JSON.stringify(remaining)}\`);
             </code></pre>
-            </div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; remaining: ${JSON.stringify(remaining)} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
-            for (var arr of remaining) {
-                $(DEFAULT).append(`<div> <b>Array Item : ${arr}</div>`) 
-            }
         },
         destructorDefault5 = () => {
             let salary=['32000','50000'];
-            let[low,average,high='88000']=salary;
-            console.log(high);
-            const newLocal = `<div class="a"><h4> Example 5 </h4> 
+            let[low, average, high = '88000']=salary;
+            console.log(`high : ${high}`);
+            const newLocal = `<section><h4> Example 5 destructuring with defaults </h4> 
             <pre><code class="language-javascript">   
             let salary=['32000','50000'];
-            let[low,average,high='88000']=salary;
-            console.log(high);
+            let[low, average, high = '88000']=salary;
+            console.log(\`high : \${high}\`);
             </code></pre>
-            <b>high : ${high}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; high : ${high} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
            
         },
         destructorNestedArrays6 = () => {
             var salary = ['32000','50000',['88000','99000']];
-            var[low,average,[actualLow,actualHigh]] = salary;
-            console.log(actualLow);
-            const newLocal = `<div class="a"><h4> Example 6 </h4> 
+            var[low, average, [actualLow, actualHigh]] = salary;
+            console.log(`actualLow : ${actualLow}`);
+            const newLocal = `<section><h4> Example 6 Destructuring nested arrays</h4> 
             <pre><code class="language-javascript">   
             let salary = ['32000','50000',['88000','99000']];
-            let[low,average,[actualLow,actualHigh]] = salary;
-            console.log(actualLow);
+            let[low, average, [actualLow, actualHigh]] = salary;
+            console.log(\`actualLow : \${actualLow}\`);
             </code></pre>
-            <b>actualLow : ${actualLow}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; actualLow : ${actualLow} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+        destructorFrunctionPara7 = () => {
+            var reviewSalary = ([low, average], high = '88000') => average
+            console.log(`reviewSalary(['32000','50000']: ${reviewSalary(['32000','50000'])}`);
+            const newLocal = `<section><h4> Example 7 Destructuring function parameters</h4> 
+            <pre><code class="language-javascript">   
+            var reviewSalary = ([low, average], high = '88000') => average
+            console.log(\`reviewSalary(['32000','50000']: \${reviewSalary(['32000','50000'])}\`);
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; reviewSalary(['32000','50000']: ${reviewSalary(['32000','50000'])} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
            
         },
-        destructorVariable7 = () => {
-            var salary = ['32000','50000'];
-            var low,average,high;
-            [low,average,high = '88000'] = salary;
-            console.log(high);
-            const newLocal = `<div class="a"><h4> Example 7 </h4> 
+        destructorObject8 = () => {
+            var salary = {
+                myNum: '100',
+                low:'32000',
+                average:'50000',
+                high:'75000'
+            };
+            var {low, average, high} = salary;
+            console.log(`high : ${high}`);
+            const newLocal = `<section><h4> Example 8 destructuring object literals with declaration</h4> 
             <pre><code class="language-javascript">   
-            var salary = ['32000','50000'];
-            var low,average,high;
-            [low,average,high = '88000'] = salary;
+            var salary = {
+                myNum: '100',
+                low:'32000',
+                average:'50000',
+                high:'75000'
+            };
+            var {low, average, high} = salary;
             console.log(high);
             </code></pre>
-            <b>high : ${high}</div>`;
-            $(DEFAULT).append(newLocal);
-           
-        },
-        destructorFrunctionPara8 = () => {
-            function reviewSalary([low,average],high='88000'){
-                console.log(average);
-                return average;
-            }
-            reviewSalary(['32000','50000']);
-            const newLocal = `<div class="a"><h4> Example 8 </h4> 
-            <pre><code class="language-javascript">   
-            function reviewSalary([low,average],high='88000'){
-                console.log(average);
-                return average;
-            }
-            reviewSalary(['32000','50000']);
-            </code></pre>
-            <b>reviewSalary(['32000','50000']); : ${reviewSalary(['32000','50000'])}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; high : ${high} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
            
         },
         destructorObject9 = () => {
-            var salary = {
-                myNum: '100',
+            let salary = {
                 low:'32000',
                 average:'50000',
                 high:'75000'
-            };
-            var{low,average,high} = salary;
-            console.log(high);
-            const newLocal = `<div class="a"><h4> Example 9 </h4> 
+            }; 
+            let {low:newLow, average:newAverage, high:newHigh } = salary;
+            console.log(`newHigh : ${newHigh}`);  
+            const newLocal = `<section><h4> Example 9 destructuring object literals with declaration and renaming</h4> 
             <pre><code class="language-javascript">   
-            var salary = {
-                myNum: '100',
+            let salary = {
                 low:'32000',
                 average:'50000',
                 high:'75000'
-            };
-            var{low,average,high} = salary;
-            console.log(high);
+            }; 
+            let {low:newLow, average:newAverage, high:newHigh } = salary;
+            console.log(\`newHigh : \${newHigh}\`);    
             </code></pre>
-            <b>high : ${high}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; newHigh : ${newHigh} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
-           
         },
         destructorObject10 = () => {
-            let salary = {
-                low:'32000',
-                average:'50000',
-                high:'75000'
-            }; 
-            let {low:newLow,average:newAverage,high:newHigh } = salary;
-            console.log(newHigh);  
-            const newLocal = `<div class="a"><h4> Example 10 </h4> 
-            <pre><code class="language-javascript">   
-            let salary = {
-                low:'32000',
-                average:'50000',
-                high:'75000'
-            }; 
-            let {low:newLow,average:newAverage,high:newHigh } = salary;
-            console.log(newHigh);    
-            </code></pre>
-            <b>newHigh : ${newHigh}</div>`;
-            $(DEFAULT).append(newLocal);
-           
-        },
-        destructorObject11 = () => {
             var salary = {
                 low:'32000',
                 average:'50000',
                 high:'75000'
             };
             var newLow,newAverage,newHigh;
-            ({low:newLow,average:newAverage,high:newHigh} = salary);
-            console.log(newHigh); 
-            const newLocal = `<div class="a"><h4> Example 11 </h4> 
+            ({low:newLow, average:newAverage, high:newHigh} = salary);
+            console.log(`newHigh : ${newHigh}`); 
+            const newLocal = `<section><h4> Example 10 destructuring with assignment and renaming </h4> 
             <pre><code class="language-javascript">   
             var salary = {
                 low:'32000',
                 average:'50000',
                 high:'75000'
             };
-            var newLow,newAverage,newHigh;
-            ({low:newLow,average:newAverage,high:newHigh} = salary);
-            console.log(newHigh);   
+            var newLow, newAverage, newHigh;
+            ({low:newLow, average:newAverage, high:newHigh} = salary);
+            console.log(\`newHigh : \${newHigh}\);   
             </code></pre>
-            <b>newHigh : ${newHigh}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; newHigh : ${newHigh} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
            
         },
-        advDestructorObject12 = () => {
-            let [high,low,] = [500,200]; 
+        advDestructorObject11 = () => {
+            let [high, low,] = [500, 200]; 
             console.log(`high:${high} low:${low}`);
-            const newLocal = `<div class="a"><h4> Example 12 </h4> 
+            const newLocal = `<section><h4> Example 11 Edge case destructuring when last variable is missing</h4> 
             <pre><code class="language-javascript">   
-            let [high,low,] = [500,200]; 
+            let [high, low,] = [500, 200]; 
             console.log(\`high:\${high} low:\${low}\`);
             </code></pre>
-            <b>high : ${high} low : ${low}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; high : ${high} low : ${low} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
-           
         },
-        advForDestructorObject13 = () => {
-            for(let [a,b] of [[5,10]]){
-                console.log(`a : ${a} b : ${b}`);
-                const newLocal = `<div class="a"><h4> Example 13 </h4> 
+        advForDestructorObject12 = () => {
+            var destructuringUsingFor = () => {
+                var arrayOfIbjects = [];
+                for(let [a,b] of [[5,10]]){
+                    arrayOfIbjects.push({a, b});
+                } 
+                return arrayOfIbjects; 
+            }
+            var arrayResult = destructuringUsingFor();
+            console.log(`arrayResult: ${JSON.stringify(arrayResult)}`);
+                
+            const newLocal = `<section><h4> Example 12 Desctructuring using for</h4> 
             <pre><code class="language-javascript">   
-            for(let [a,b] of [[5,10]]){
-                console.log(\`a : \${a} b : \${b}\`);
+            var destructuringUsingFor = () => {
+                var arrayOfIbjects = [];
+                for(let [a,b] of [[5,10]]){
+                    arrayOfIbjects.push({a, b});
+                } 
+                return arrayOfIbjects; 
             }
+            var arrayResult = destructuringUsingFor();
+            console.log(\`arrayResult: \${JSON.stringify(arrayResult)}\`);
+            
             </code></pre>
-            <b>a : ${a} b : ${b}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; arrayResult: ${JSON.stringify(arrayResult)} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
-            }
         }, 
-        advThrowDestructorObject14 = () => {
-            try{
-                throw[123,'message'];
-            }catch([invoiceNum,errorMessage]){
-                console.log(`invoiceNum: ${invoiceNum} errorMessage : ${errorMessage}`);
-                const newLocal = `<div class="a"><h4> Example 14 </h4> 
+        advThrowDestructorObject13 = () => {
+            var throwErrsUsingDestructuring = () => {
+                try{
+                    throw[123,'message'];
+                }catch([invoiceNum,errorMessage]){
+                    return `invoiceNum: ${invoiceNum} errorMessage : ${errorMessage}`;
+                }
+            }
+            console.log(`throwErrsUsingDestructuring(): ${throwErrsUsingDestructuring()}`);
+           
+            const newLocal = `<section><h4> Example 13 Desctructuring in try catch blocks</h4> 
             <pre><code class="language-javascript">   
-            try{
-                throw[123,'message'];
-            }catch([invoiceNum,errorMessage]){
-                console.log(\`invoiceNum: \${invoiceNum} errorMessage : \${errorMessage}\`);
+            var throwErrsUsingDestructuring = () => {
+                try{
+                    throw[123,'message'];
+                }catch([invoiceNum,errorMessage]){
+                    return \`invoiceNum: \${invoiceNum} errorMessage : \${errorMessage}\`;
+                }
             }
+            console.log(\`throwErrsUsingDestructuring(): \${throwErrsUsingDestructuring()}\`);
             </code></pre>
-            <b>invoiceNum: ${invoiceNum} errorMessage : ${errorMessage}</div>`;
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; throwErrsUsingDestructuring(): ${throwErrsUsingDestructuring()} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
-            }
-          
         },
-        advDestructorObject15 = () => {
-            function getResult(){
-                let high,low;
-                return {high,low} = {high:500,low:200};
-            }
+        advDestructorObject14 = () => {
+            let high, low;
+            var getResult = () => ({high, low} = {high:500, low:200});
+            var result = getResult();
+            console.log(`result: ${JSON.stringify(result)}`);
+            const newLocal = `<section><h4> Example 14 destructuring object literals</h4> 
+            <pre><code class="language-javascript">   
+            let high, low;
+            var getResult = () => ({high, low} = {high:500, low:200});
+            var result = getResult();
+            console.log(\`result: \${JSON.stringify(result)}\`);
             console.log(getResult());
+            </code></pre>
+            </section>
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; result: ${JSON.stringify(result)} &#9632;
+            </aside>`;
+            $(DEFAULT).append(newLocal);
+        },
+
+        destructorObject15 = () => {
+            var salary = {
+                myNum: '100',
+                low:'32000',
+                average:'50000',
+                high:'75000',
+                gridMain : {
+                    gMin: 9,
+                    gHigh: 100
+                }
+            };
+
+            var result = (p, {high, low, gridMain}) => `${p}  ${high}  ${low}  ${gridMain.gHigh}`;
+            var rtn = result('hi', salary);
+            console.log(`rtn: ${rtn}`);
             const newLocal = `<div class="a"><h4> Example 15 </h4> 
             <pre><code class="language-javascript">   
-            function getResult(){
-                let high,low;
-                return {high,low} = {high:500,low:200};
-            }
-            console.log(getResult());
-            </code></pre>
-            <b>getResult() : ${JSON.stringify(getResult(), null, 2)}</div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        destructorObject16 = () => {
             var salary = {
                 myNum: '100',
                 low:'32000',
@@ -601,450 +1337,16 @@
                     gHigh: 100
                 }
             };
-
-            function result(p, {high, low, gridMain} ){
-                return `${p}  ${high}  ${low}  ${gridMain.gHigh}`;
-            }
+            var result = (p, {high, low, gridMain}) => \`\${p}  \${high}  \${low}  \${gridMain.gHigh}\`;
             var rtn = result('hi', salary);
-            console.log(rtn);
-            const newLocal = `<div class="a"><h4> Example 16 </h4> 
-            <pre><code class="language-javascript">   
-            var salary = {
-                myNum: '100',
-                low:'32000',
-                average:'50000',
-                high:'75000',
-                gridMain : {
-                    gMin: 9,
-                    gHigh: 100
-                }
-            };
-            function result(p, {high, low, gridMain}){
-                return "p  high  low  gridMain.gHigh";
-            }
-            var rtn = result('hi', salary);
-            console.log(rtn);
+            console.log(\`rtn: \${rtn}\`);
             </code></pre>
-            <b>rtn : ${rtn}</div>`;
-            $(DEFAULT).append(newLocal);
-           
-        },
-        classes1 = () =>{
-            class Task{
-
-            };
-            console.log(typeof Task);
-            const newLocal = `<div class="a"> <h2> classes </h2><h4> Example 1 </h4> 
-            <pre><code class="language-javascript">   
-            class Task{
-
-            };
-            console.log(typeof Task);
-            </code></pre>
-            <b>typeof Task : ${typeof Task}</div>`;
-            $(DEFAULT).append(newLocal);
-        },        
-        classes2 = () =>{
-            class Task{}
-            let taskObj = new Task();
-            console.log(typeof taskObj);
-            console.log(taskObj instanceof Task);
-            const newLocal = `<div class="a"><h4> Example 2 </h4> 
-            <pre><code class="language-javascript">   
-            class Task{}
-            let taskObj = new Task();
-            console.log(typeof taskObj);
-            console.log(taskObj instanceof Task);
-            </code></pre>
-            <b>typeof taskObj : ${typeof taskObj} <br>taskObj instanceof Task : ${taskObj instanceof Task}</div>`;
-            $(DEFAULT).append(newLocal);
-        },        
-        classesMethods3 = () =>{
-            class Task{
-                constructor(){
-                    console.log('constructingTask');
-                }
-                showId(){
-                    console.log('99');
-                    return '99';
-                }
-            }
-            let task = new Task();
-            task.showId();
-            console.log(task.showId===Task.prototype.showId);
-            const newLocal = `<div class="a"><h4> Example 3 </h4> 
-            <pre><code class="language-javascript">   
-            class Task{
-                constructor(){
-                    console.log('constructingTask');
-                }
-                showId(){
-                    console.log('99');
-                    return '99';
-                }
-            }
-            let task = new Task();
-            task.showId();
-            console.log(task.showId===Task.prototype.showId);
-            </code></pre>
-            <b>task.showId() : ${task.showId()} <br> 
-            task.showId===Task.prototype.showId : ${task.showId===Task.prototype.showId} <br>
-            </div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        classesExpression4 = () =>{
-            let myClass = class Task{
-                constructor(){
-                    console.log('constructingTask');
-                }
-            };
-            new myClass();
-            const newLocal = `<div class="a"><h4> Example 4 </h4> 
-            <pre><code class="language-javascript">   
-            let myClass = class Task{
-                constructor(){
-                    console.log('constructingTask');
-                }
-            };
-            new myClass();
-            </code></pre>
-            <b>new myClass() : constructingTask</div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        classesExtends5 = () =>{
-            class Project { 
-                constructor(name) {
-                    console.log('constructing Project:'+ name);
-                    this.name = 'constructing Project:'+ name;
-                }
-                getTaskCount() {
-                    return 50;
-                }
-            }
-            class SoftwareProject extends Project{
-                constructor(name, namesp) {
-                    super(name);
-                    console.log('constructing SoftwareProject');
-                    this.nameSP = 'constructing SoftwareProject:' + namesp;
-                }
-                getTaskCount() {
-                    return super.getTaskCount() + 6;
-                }
-            }
-            let p = new SoftwareProject('Mazatlan', 'MazatlanSP');
-            const newLocal = `<div class="a"><h4> Example 5 </h4> 
-            <pre><code class="language-javascript">   
-            class Project { 
-                constructor(name) {
-                    console.log('constructing Project:'+ name);
-                    this.name = 'constructing Project:'+ name;
-                }
-                getTaskCount() {
-                    return 50;
-                }
-            }
-            class SoftwareProject extends Project{
-                constructor(name, namesp) {
-                    super(name);
-                    console.log('constructing SoftwareProject');
-                    this.nameSP = 'constructing SoftwareProject:' + namesp;
-                }
-                getTaskCount() {
-                    return super.getTaskCount() + 6;
-                }
-            }
-            let p = new SoftwareProject('Mazatlan', 'MazatlanSP');
-            </code></pre>
-            <b>p.name : ${p.name} <br>p.nameSP : ${p.nameSP} <br>p.getTaskCount(): ${p.getTaskCount()} </div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        classesObjectLiteral6 = () =>{
-            
-            let project = {
-                getTaskCount(){
-                    return 50;
-                }
-            };
-            let softwareProject = {
-                getTaskCount() { 
-                    return super.getTaskCount() + 7;
-                }
-            }
-            Object.setPrototypeOf(softwareProject, project);
-            console.log(softwareProject.getTaskCount());
-            const newLocal = `<div class="a"><h4> Example 6 </h4> 
-            <pre><code class="language-javascript">   
-            let project = {
-                getTaskCount(){
-                    return 50;
-                }
-            };
-            let softwareProject = {
-                getTaskCount() { 
-                    return super.getTaskCount() + 7;
-                }
-            }
-            Object.setPrototypeOf(softwareProject, project);
-            console.log(softwareProject.getTaskCount());
-            </code></pre>
-            <b>softwareProject.getTaskCount() : ${softwareProject.getTaskCount()}</div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        classesStaticFunctions7 = () =>{
-            class Project{
-                static getDefaultId() {
-                    return 0;
-                }
-            }
-            Project.id=99;
-            console.log(Project.getDefaultId());
-            const newLocal = `<div class="a"><h4> Example 7 </h4> 
-            <pre><code class="language-javascript">   
-            class Project{
-                static getDefaultId() {
-                    return 0;
-                }
-            }
-            console.log(Project.getDefaultId());
-            </code></pre>
-            <b>Project.getDefaultId() : ${Project.getDefaultId()} <br>
-            Project.id : ${Project.id}</div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        classesTarget8 = () =>{
-            class Project {
-                constructor() { 
-                    console.log(new.target);
-                    this.strTarget = new.target;
-                }
-            }
-            class SoftwareProject extends Project {
-                constructor() {
-                    super();
-                }
-            }
-            var p = new Project();
-            var m = new SoftwareProject();
-            const newLocal = `<div class="a"><h4> Example 8 </h4> 
-            <pre><code class="language-javascript">   
-            class Project {
-                constructor() { 
-                    console.log(new.target);
-                    this.strTarget = new.target;
-                }
-            }
-            var p = new Project();
-            </code></pre>
-            <b>p.strTarget : ${p.strTarget} <br>
-            m.strTarget : ${m.strTarget}  </div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        symbolSyntax = () =>{
-            let eventSymbol = Symbol('resize event');
-            console.log(typeof eventSymbol);
-            console.log(eventSymbol.toString());
-
-            const CALCULATE_EVENT_SYMBOL=Symbol('calculate event');
-            console.log(CALCULATE_EVENT_SYMBOL.toString());
-
-            let s = Symbol.for('event');
-            console.log(s.toString());
-
-            let s2 = Symbol('event');
-            console.log(s === s2);
-
-            let s3 = Symbol.for('event');
-            console.log(s === s3);
-
-            let description = Symbol.keyFor(s3);
-            console.log(description);
-
-            let article={
-                title:'WhitefaceMountain',
-                [Symbol.for('article')]:'MyArticle'
-            };
-            let value = article[Symbol.for('article')];
-            console.log(value);
-
-            console.log(Object.getOwnPropertySymbols(article)); 
-            const newLocal = `<div class="a"> <h2> Symbol syntax </h2><h4> Example 1 </h4> 
-            <pre><code class="language-javascript">   
-            let eventSymbol = Symbol('resize event');
-            console.log(typeof eventSymbol);
-            console.log(eventSymbol.toString());
-            
-            // Constants
-            const CALCULATE_EVENT_SYMBOL=Symbol('calculate event');
-            console.log(CALCULATE_EVENT_SYMBOL.toString());
-
-            // Using symbol registry - will create or return existing symbol with creating unique symobol for same key string.
-            let s = Symbol.for('event');
-            console.log(s.toString());
-
-            // Always creates unique value.
-            let s2 = Symbol('event');
-            console.log(s === s2);
-
-            // Get symbol from registry to stop stop duplicate keys.
-            let s3 = Symbol.for('event');
-            console.log(s === s3);
-
-            // Get key
-            let description = Symbol.keyFor(s3);
-            console.log(description);
-
-            // symbols for objects literals
-            let article={
-                title:'WhitefaceMountain',
-                [Symbol.for('article')]:'MyArticle'
-            };
-            let value = article[Symbol.for('article')];
-            console.log(value);
-
-            // Can get property names but cannot use Object.getOwnPropertyNames()
-            console.log(Object.getOwnPropertySymbols(article)); 
-            </code></pre>
-            <b>typeof eventSymbol : ${typeof eventSymbol} <br>
-            eventSymbol.toString() : ${eventSymbol.toString()}<br>
-            CALCULATE_EVENT_SYMBOL.toString() : ${CALCULATE_EVENT_SYMBOL.toString()} <br>
-            s.toString() : ${s.toString()} <br>
-            s === s2 : ${s === s2} <br>
-            s === s3 : ${s === s3} <br>
-            Symbol.keyFor(s3) : ${ Symbol.keyFor(s3)} <br>
-            value : ${value} <br>
-            Object.getOwnPropertySymbols(article) :  ${Object.getOwnPropertySymbols(article)[0].toString()}</div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        symbolSyntax1 = () =>{
-            let Blog = function(){};
-            let blog = new Blog();
-            console.log(blog.toString());
-
-            let Blog1 = function(){};
-            Blog1.prototype[Symbol.toStringTag] = 'Blog1Class';
-            let blog1 = new Blog1();
-            console.log(blog1.toString());
-            const newLocal = `<div class="a"><h4> Example 2 </h4> 
-            <pre><code class="language-javascript">
-            let Blog = function(){};
-            let blog = new Blog();
-            console.log(blog.toString());
-
-            let Blog1 = function(){};
-            Blog1.prototype[Symbol.toStringTag] = 'Blog1Class';
-            let blog1 = new Blog1();
-            console.log(blog1.toString());
-            </code></pre>   
-            <b>blog.toString() :  ${blog.toString()}<br>
-            blog1.toString() : ${blog1.toString()}
-            </div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        symbolSyntax2 = () =>{
-            let values=[8,12,16];
-            console.log([].concat(values));
-
-            let values1=[8,12,16];
-            values1[Symbol.isConcatSpreadable] = false;
-            console.log([].concat(values1));
-            const newLocal = `<div class="a"><h4> Example 2 </h4> 
-            <pre><code class="language-javascript">
-            let values=[8,12,16];
-            console.log([].concat(values));
-
-            let values1=[8,12,16];
-            values1[Symbol.isConcatSpreadable] = false;
-            console.log([].concat(values1));;
-            </code></pre>   
-            <b>[].concat(values) :  ${[].concat(values)}<br>
-            [].concat(values1) : ${[].concat(values1)}
-            </div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        objectSetPrototypeOf = () =>{
-            // setPrototypeOf
-            let a = {x:1};
-            let b = {y:2};
-            Object.setPrototypeOf(a,b);
-            console.log(a.y);
-
-            // assign
-            let target = {};
-            Object.assign(target,a,b);
-            console.log(target);
-
-            // not enumerable
-            let target1 = {};
-            Object.defineProperty(b,'c',{value:10,enumerable:false});
-            Object.assign(target1,a,b);
-            console.log(target1);
-
-            // assign will not walk the prototype chain.
-            b.z = 5;
-            let c = {c:20};
-            Object.setPrototypeOf(b, c);
-            let target2 = {};
-            Object.assign(target2, a, b);
-            console.log(target2);
-            const newLocal = `<div class="a"><h2> Object Extensions </h2><h4> Example 1 </h4> 
-            <pre><code class="language-javascript">
-            // setPrototypeOf
-            let a = {x:1};
-            let b = {y:2};
-            Object.setPrototypeOf(a,b);
-            console.log(a.y);
-
-            // assign
-            let target = {};
-            Object.assign(target,a,b);
-            console.log(target);
-
-            // not enumerable
-            let target1 = {};
-            Object.defineProperty(b,'c',{value:10,enumerable:false});
-            Object.assign(target1,a,b);
-            console.log(target1);
-
-            // assign will not walk the prototype chain.
-            let a = {a:1}, 
-            b = {a:5, b:2},
-            c = {c:20};
-            Object.setPrototypeOf(b, c);
-            let target2 = {};
-            Object.assign(target2, a, b);
-            console.log(target2);
-
-            </code></pre>   
-            <b>console.log(a.y) :  ${a.y}<br>
-            console.log(target) : ${JSON.stringify(target, null, 2)}<br>
-            console.log(target1) : ${JSON.stringify(target1, null, 2)}<br>
-            console.log(target2) : ${JSON.stringify(target2, null, 2)}
-            </div>`;
+            <aside class="text-info bg-light mb-3">
+                <cite title="Results">Result - </cite>&#9632; rtn : ${rtn} &#9632;
+            </aside>`;
             $(DEFAULT).append(newLocal);
         }, 
-        objectis = () =>{
-            let amount1 = NaN;
-            let amount = 0, total = -0;
-            
-            console.log(amount1 === amount1);
-            console.log(Object.is(amount, amount));
-            console.log(Object.is(amount,total));
-
-            const newLocal = `<div class="a"><h2> Object extensions - is </h2><h4> Example 1 </h4>  
-            <pre><code class="language-javascript">
-            let amount1 = NaN;
-            let amount = 0, total = -0;
-            
-            console.log(amount1 === amount1);
-            console.log(Object.is(amount, amount));
-            console.log(Object.is(amount, total));
-            </code></pre>   
-            <b>amount1 === amount1 :  ${amount1 === amount1}<br>
-            Object.is(amount, amount) : ${Object.is(amount, amount)}<br>
-            Object.is(amount, total) : ${Object.is(amount,total)}
-            </div>`;
-            $(DEFAULT).append(newLocal);
-        },
+        
         stringExtensions = () => {
             let title = 'SantaBarbaraSurfRiders';
             console.log(title.startsWith('Santa'));
@@ -1153,320 +1455,8 @@
             </div>`;
             $(DEFAULT).append(newLocal);
         },
-        numberExtensions = () => {
-
-            // Extensions Number.parseInt
-            console.log(Number.parseInt === parseInt);
-            console.log(Number.parseFloat === parseFloat);
-
-            // NaN where it is a string 'NaN' instead of NaN
-            let s = 'NaN';
-            console.log(isNaN(s));
-            console.log(Number.isNaN(s));
-
-            // When variable is a number as a string.
-            let s1 = '8000';
-            console.log(isFinite(s1));
-            console.log(Number.isFinite(s1));
-
-            // Integer extensions
-            let sum = 408.2;
-            console.log(Number.isInteger(sum));
-            console.log(Number.isInteger(NaN));
-            console.log(Number.isInteger(Infinity));
-            console.log(Number.isInteger(undefined));
-            console.log(Number.isInteger(3));
-
-            // highest integer
-            let a = Math.pow(2,53)-1;
-            console.log(Number.isSafeInteger(a));
-            let a1 = Math.pow(2,53);
-            console.log(Number.isSafeInteger(a1));
-
-            const newLocal = `<div class="a"><h2>Number extensions </h2><h4> Example 1 </h4>  
-            <pre><code class="language-javascript">
-            // Extensions Number.parseInt
-            console.log(Number.parseInt === parseInt);
-            console.log(Number.parseFloat === parseFloat);
-
-            // NaN where it is a string 'NaN' instead of NaN
-            let s = 'NaN';
-            console.log(isNaN(s));
-            console.log(Number.isNaN(s));
-
-            // When variable is a number as a string.
-            let s1 = '8000';
-            console.log(isFinite(s1));
-            console.log(Number.isFinite(s1));
-
-            // highest integer
-            let a = Math.pow(2,53)-1;
-            console.log(Number.isSafeInteger(a));
-            let a1 = Math.pow(2,53);
-            console.log(Number.isSafeInteger(a1));
-
-            </code></pre>   
-            <b>Number.parseInt === parseInt :  ${Number.parseInt === parseInt}<br>
-            Number.parseFloat === parseFloat : ${Number.parseFloat === parseFloat}<br>
-            isNaN(s) : ${isNaN(s)}<br>
-            Number.isNaN(s) : ${Number.isNaN(s)}<br>
-            isFinite(s1) : ${isFinite(s1)}<br>
-            Number.isFinite(s1) : ${Number.isFinite(s1)}<br>
-            Number.isInteger(sum) : ${Number.isInteger(sum)}<br>
-            Number.isInteger(NaN) : ${Number.isInteger(NaN)}<br>
-            Number.isInteger(Infinity) : ${Number.isInteger(Infinity)}<br>
-            Number.isInteger(undefined) : ${Number.isInteger(undefined)}<br>
-            Number.isInteger(3) : ${Number.isInteger(3)}<br>
-            Number.isSafeInteger(a) (${a}) : ${Number.isSafeInteger(a)}<br>
-            Number.isSafeInteger(a1) (${a1}) : ${Number.isSafeInteger(a1)}<br>
-            </div>`;
-            $(DEFAULT).append(newLocal);
-        },
-        iteratorSyntax1 = () => {
-            // What is the typeof Symbol.iterator
-            let ids=[9000,9001,9002];
-            console.log(typeof ids[Symbol.iterator] );
-
-            // using iterator
-            let it = ids[Symbol.iterator]();
-            console.log(it.next());
-
-            // End of iteration - tha last value 
-            let ids1=[9000,9001,9002];
-            let it1 = ids[Symbol.iterator]();
-            it1.next();
-            it1.next();
-            var itv = it1.next()
-            console.log(itv);
-
-            // End of iteration - Done True 
-            let ids2=[9000,9001,9002];
-            let it2 = ids[Symbol.iterator]();
-            it2.next();
-            it2.next();
-            it2.next();
-            var itv2 = it2.next()
-            console.log(itv2);
-
-            // Create your own iterator
-            let idMaker = { 
-                [Symbol.iterator]() {
-                    let nextId = 8000;
-                    return {
-                        next() {
-                            return {
-                                value : nextId++,
-                                done : false
-                            };
-                        }
-                    };
-                }
-            };
-            let it3 = idMaker[Symbol.iterator]();
-            console.log(it3.next().value);
-            console.log(it3.next().value);
-            let it3Val = it3.next().value;
-            console.log(it3Val);
-
-            // using for...of to iterate
-            let idMaker1 = {
-                [Symbol.iterator]() {
-                    let nextId = 8000;
-                    return {
-                        next() {
-                            return { 
-                                value: nextId++,
-                                done:false
-                            };
-                        }
-                    };
-                }
-            };
-            let results1 = '';
-            for(let v of idMaker1) {
-                if(v > 8002) 
-                    break;
-                results1 += `${v}\n`;
-            } 
-            console.log(results1);
-
-            // Using for...of to iterate with end of sequence defined in iterator
-            let idMaker2 = {
-                [Symbol.iterator]() {
-                    let nextId = 8000;
-                    return {
-                        next() {
-                            let value = nextId > 8002 ? undefined : nextId++;
-                            let done = !value;
-                            return {
-                                value,
-                                done
-                            };
-                        }
-                    };
-                }
-            };
-            let results2 = '';
-            for(let v of idMaker2)
-                results2 += `${v}\n`;
-            console.log(results2);
-
-            // Example of using iterator with the spread operator
-            let ids3 = [8000,8001,8002];
-            let idVal = 0;
-            function process(id1,id2,id3) {
-                idVal = id3;
-                console.log(idVal);
-            }
-            process(...ids3);
-
-            const newLocal = `<div class="a"><h2>Iterator</h2><h4> Example 1 </h4>  
-            <pre><code class="language-javascript">
-            // What is the typeof Symbol.iterator
-            let ids=[9000,9001,9002];
-            console.log(typeof ids[Symbol.iterator] );
-
-            // using iterator
-            let it = ids[Symbol.iterator]();
-            console.log(it.next());
-
-            // End of iteration - tha last value 
-            let ids1=[9000,9001,9002];
-            let it1 = ids[Symbol.iterator]();
-            it1.next();
-            it1.next();
-            var itv = it1.next()
-            console.log(itv);
-
-            // End of iteration - Done True 
-            let ids2=[9000,9001,9002];
-            let it2 = ids[Symbol.iterator]();
-            it2.next();
-            it2.next();
-            it2.next();
-            var itv2 = it2.next()
-            console.log(itv2);
-
-            // Create your own iterator
-            let idMaker = { 
-                [Symbol.iterator]() {
-                    let nextId = 8000;
-                    return {
-                        next() {
-                            return {
-                                value : nextId++,
-                                done : false
-                            };
-                        }
-                    };
-                }
-            };
-            let it3 = idMaker[Symbol.iterator]();
-            console.log(it3.next().value);
-            console.log(it3.next().value);
-            let it3Val = it3.next().value;
-            console.log(it3Val);
-
-            // using for...of to iterate
-            let idMaker1 = {
-                [Symbol.iterator]() {
-                    let nextId = 8000;
-                    return {
-                        next() {
-                            return { 
-                                value: nextId++,
-                                done:false
-                            };
-                        }
-                    };
-                }
-            };
-            let results1;
-            for(let v of idMaker1) {
-                if(v > 8002) 
-                    break;
-                results1 += \`\${v}\`;
-            } 
-            console.log(results1);
-
-            // Using for...of to iterate with end of sequence defined in iterator
-            let idMaker2 = {
-                [Symbol.iterator]() {
-                    let nextId = 8000;
-                    return {
-                        next() {
-                            let value = nextId > 8002 ? undefined : nextId++;
-                            let done = !value;
-                            return {
-                                value,
-                                done
-                            };
-                        }
-                    };
-                }
-            };
-            let results2 = '';
-            for(let v of idMaker2)
-                results2 += \`\${v}\`;
-            console.log(results2);
-
-            // Example of using iterator with the spread operator
-            let ids3 = [8000,8001,8002];
-            let idVal = 0;
-            function process(id1,id2,id3) {
-                idVal = id3;
-                console.log(idVal);
-            }
-            process(...ids3);
-
-            </code></pre>   
-            <b>typeof ids[Symbol.iterator]  :  ${typeof ids[Symbol.iterator]}<br>
-            it.next() : ${JSON.stringify(it.next(), null, 2)}<br>
-            it1.next() : ${JSON.stringify(itv, null, 2)}<br>
-            it2.next() : ${JSON.stringify(itv2, null, 2)}<br>
-            console.log(it3.next().value) : ${it3Val}<br>
-            results1 : ${results1}<br>
-            results2 : ${results2}<br>
-            idVal : ${idVal}
-            </div>`;
-            $(DEFAULT).append(newLocal);
-
-           
-        },
+       
         generators  = () => {
-            // Using a generator example 1
-            function *process() { yield 8000; yield 8001; } 
-            let it = process(); 
-            var result = it.next();
-            console.log(result);
-           
-            // Using a generator example 2 - get second yielded value
-            var result1 = it.next();
-            console.log(result1);
-
-            // Using a generator example 3 - reaching the end generator shut down
-            var result2 = it.next();
-            console.log(result2);
-
-            // Using a generator example 4 - indefenite iterator
-            function *process1() { 
-                let nextId = 7000; 
-                while(true) 
-                    yield(nextId++); 
-                
-            } 
-            let it1 = process1(); 
-            it1.next();
-            let result3 = it1.next().value;
-            console.log(result3);
-
-            // Example 5 - Using for of loop on generators
-            var rst = `ids: `;
-            for(let id of process1()){
-                if(id > 7002) break;
-                rst = rst + `${JSON.stringify(id, null, 2)}<br>`
-            };
-            console.log(rst);
 
             // example 6 - yield value passed in.
             function *process2() { 
@@ -2391,61 +2381,52 @@
             <b>example 17 ...ids17.values() = ${JSON.stringify([...ids17.values()], null, 2)}`;
             $(DEFAULT).append(newLocal);
 
-        }
-
-        ;
-
-        
-               
+        };
         // Public methods
         return {
             syntaxSample :mySyntaxSample,
-            showCategories,
+            defaultsFunctionParam1,
+            defaultsFunctionParam2,
+            defaultsFunctionParam3,
+            defaultsFunctionParam4,
+            defaultsFunctionParam5,
+            defaultsFunctionParam6,
+            defaultsFunctionParam7,
+            defaultsFunctionParam8,
+            rest1,
+            rest2,
+            rest3,
+            rest4,
             spreadOpperator1,
             spreadOpperator2,
             spreadOpperator3,
             spreadOpperator4,
             objectLiteral1,
             objectLiteral2,
-            objectLiteral3This,
+            objectLiteral3,
             objectLiteral4,
             objectLiteral5,
-            objectLiteral6,
-            objectLiteral7,
-            objectLiteral8,
+            forOfLoop,
+            octalsAndBinaries,
+            templateLiterals1,
+            templateLiterals2,
+            templateLiterals3,
+            templateLiterals4,
             destructor1,
             destructor2,
             destructor3,
             destructor4,
             destructorDefault5,
             destructorNestedArrays6,
-            destructorVariable7,
-            destructorFrunctionPara8,
+            destructorFrunctionPara7,
+            destructorObject8,
             destructorObject9,
-            destructorObject10,
-            destructorObject11,
-            advDestructorObject12,
-            advForDestructorObject13,
-            advThrowDestructorObject14,
-            advDestructorObject15,
-            destructorObject16,
-            classes1,
-            classes2,
-            classesMethods3,
-            classesExpression4,
-            classesExtends5,
-            classesObjectLiteral6,
-            classesStaticFunctions7,
-            classesTarget8,
-            symbolSyntax,
-            symbolSyntax1,
-            symbolSyntax2,
-            objectSetPrototypeOf,
-            objectis,
-            stringExtensions,
-            stringExtensionsImogi,
-            numberExtensions,
-            iteratorSyntax1,
+            destructorObject10, 
+            advDestructorObject11,
+            advForDestructorObject12,
+            advThrowDestructorObject13,
+            advDestructorObject14,
+            destructorObject15,
             generators,
             promises,
             arrays
@@ -2454,3 +2435,6 @@
 
 })(window.Gus = window.Gus || {}, 
     window.Gus.ES6 = window.Gus.ES6 || {});
+
+let ES6Obj = Gus.ES6.ES6Obj;
+export {ES6Obj};
