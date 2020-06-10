@@ -211,15 +211,100 @@ ns1.GeneratorYieldExamples.prototype = function(){
         </aside>`;
         $(this.examplesCtl).append(newLocal);    
 
-    }
-    ;
+    },
+    yieldExceptionHandling = function yieldGracefulStop(){
+        // yield and exception handling
+        function * process() { 
+            try{ 
+                yield 9000; 
+                yield 9001; 
+                yield 9002; 
+            } catch(e) {}
+        }
+        let it = process(); 
+        let rsta, rstb, rstc;
+        rsta = it.next();
+        rstb = it.throw('foo');
+        rstc = it.next();
+        console.log(`rsta: ${JSON.stringify(rsta)}`); 
+        console.log(`rstb: ${JSON.stringify(rstb)}`); 
+        console.log(`rstc: ${JSON.stringify(rstc)}`);
+        const newLocal = `<section><h4> Example 9 yield and exception handling</h4> 
+        <pre><code class="language-javascript">   
+        // yield and exception handling
+        function * process() { 
+            try{ 
+                yield 9000; 
+                yield 9001; 
+                yield 9002; 
+            } catch(e) {}
+        }
+        let it = process(); 
+        let rsta, rstb, rstc;
+        rsta = it.next();
+        rstb = it.throw('foo');
+        rstc = it.next();
+        console.log(\`rsta: \${JSON.stringify(rsta)}\`); 
+        console.log(\`rstb: \${JSON.stringify(rstb)}\`); 
+        console.log(\`rstc: \${JSON.stringify(rstc)}\`); 
+        </code></pre>
+        </section>
+        <aside class="text-info bg-light mb-3">
+            <cite title="Results">Result - </cite>&#9632; rsta: ${JSON.stringify(rsta)} &#9632;
+            <br>&#9632; rstb: ${JSON.stringify(rstb)} &#9632;
+            <br>&#9632; rstc: ${JSON.stringify(rstc)} &#9632;
+        </aside>`;
+        $(this.examplesCtl).append(newLocal);    
+    },
+    yieldGracefulStop = function yieldGracefulStop(){
+         // yield gracefully stopping
+         function * process() { 
+            yield 9000; 
+            yield 9001; 
+            yield 9002; 
+        }
+        let it = process(); 
+        let rsta, rstb, rstc;
+        rsta = it.next();
+        rstb = it.return('foo');
+        rstc = it.next();
+        console.log(`rsta: ${JSON.stringify(rsta)}`);
+        console.log(`rstb: ${JSON.stringify(rstb)}`);
+        console.log(`rstc: ${JSON.stringify(rstc)}`);
+        const newLocal = `<section><h4> Example 10 yield gracefully stopping</h4> 
+        <pre><code class="language-javascript">   
+        // yield gracefully stopping
+        function * process() { 
+           yield 9000; 
+           yield 9001; 
+           yield 9002; 
+        }
+        let it = process(); 
+        let rsta, rstb, rstc;
+        rsta = it.next();
+        rstb = it.return('foo');
+        rstc = it.next();
+        console.log(\`rsta: \${JSON.stringify(rsta)}\`); 
+        console.log(\`rstb: \${JSON.stringify(rstb)}\`); 
+        console.log(\`rstc: \${JSON.stringify(rstc)}\`); 
+        </code></pre>
+        </section>
+        <aside class="text-info bg-light mb-3">
+            <cite title="Results">Result - </cite>&#9632; rsta: ${JSON.stringify(rsta)} &#9632;
+            <br>&#9632; rstb: ${JSON.stringify(rstb)} &#9632;
+            <br>&#9632; rstc: ${JSON.stringify(rstc)} &#9632;
+        </aside>`;
+        $(this.examplesCtl).append(newLocal); 
+    };
     return{
         yieldValuePassedIn,
         yieldNumber,
         yieldArray,
         yieldPrecedence,
         yieldWithArrays,
-        yieldDelegation
+        yieldDelegation,
+        yieldExceptionHandling,
+        yieldGracefulStop
     }   
 }();
 

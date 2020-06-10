@@ -127,6 +127,8 @@ myGeneratorYieldExamples.yieldArray();
 myGeneratorYieldExamples.yieldPrecedence();
 myGeneratorYieldExamples.yieldWithArrays();
 myGeneratorYieldExamples.yieldDelegation();
+myGeneratorYieldExamples.yieldExceptionHandling();
+myGeneratorYieldExamples.yieldGracefulStop();
 //syn.generators();
 syn.promises();
 syn.arrays();
