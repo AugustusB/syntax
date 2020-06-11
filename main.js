@@ -8,8 +8,9 @@ import NumberExtension from "./modules/numberExtModule.js";
 import FunctionExtension from "./modules/functionExtModule.js";
 import IteratorExamples from "./modules/iteratorModule.js";
 import GeneratorExamples from "./modules/generatorModule.js";
-import GeneratorYieldExamples from "./modules/generatorYieldModule/generatorYield.js";
-import PromiseExamples from "./modules/promisesModule.js";
+import GeneratorYieldExamples from "./modules/generator/generatorYieldModule.js";
+import PromiseExamples from "./modules/promiseModule.js";
+import PromiseMoreFeatureExamples from "./modules/promise/promiseMoreFeaturesModule.js";
 
 
 project.projectIDModules = 599
@@ -130,7 +131,7 @@ myGeneratorYieldExamples.yieldWithArrays();
 myGeneratorYieldExamples.yieldDelegation();
 myGeneratorYieldExamples.yieldExceptionHandling();
 myGeneratorYieldExamples.yieldGracefulStop();
-// Promises 
+// Promises...
 var myPromiseExamples = new PromiseExamples('body #codeExamples');
 myPromiseExamples.promiseResolve();
 myPromiseExamples.promiseReject();
@@ -138,5 +139,8 @@ myPromiseExamples.resolveWithPara();
 myPromiseExamples.rejectWithPara();
 myPromiseExamples.chainingThen();
 myPromiseExamples.rejectWithCatch();
-
+// more promise features...
+var myPromiseMoreFeatureExamples = new PromiseMoreFeatureExamples('body #codeExamples');
+myPromiseMoreFeatureExamples.callAnotherPormise();
+myPromiseMoreFeatureExamples.noAsyncCallNeeded();
 syn.arrays();

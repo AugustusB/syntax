@@ -1459,25 +1459,7 @@
             
             
 
-             // example 6 - promise reject with catch 
-             function doAsync6() { 
-                let p = new Promise(function (resolve, reject) { 
-                    console.log('in promise code'); 
-                    setTimeout(function () { 
-                        reject('Nope no go....'); 
-                    }, 5000); 
-                }); 
-                return p; 
-            }
-            doAsync6().catch(
-                function(reason){console.log('Error : ' + reason);}
-            ).then(
-                function(value){console.log('fulfilled....' + value);},
-                function(resaon){console.log('rejected 1st then....' + resaon);}
-            ).then(
-                function(value){console.log('Really....' + value);},
-                function(resaon){console.log('rejected 2nd then ....' + resaon);}
-            );
+
 
             // example 7 - resolved without waiting for work to complete
             function doAsync7() { 
