@@ -269,7 +269,7 @@ ns1.PromiseExamples.prototype = function() {
             function(resaon){console.log('rejected 2nd then ....' + resaon);}
         );
 
-        const newLocal = `<section><h4> Example 4 promise resolve chaining then fuctions.</h4> 
+        const newLocal = `<section><h4> Example 5 promise reject with catch </h4> 
         <pre><code class="language-javascript">   
         // promise reject with catch 
         function doAsync() { 
