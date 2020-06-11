@@ -1458,27 +1458,6 @@
         promises  = () => {
             
             
-
-
-
-            // example 7 - resolved without waiting for work to complete
-            function doAsync7() { 
-                return Promise.resolve('resolve called in promises....'); 
-            }
-            doAsync7().then( 
-                function (value) { console.log('Ok: ' + value) }, 
-                function (reason) { console.log('Nope: ' + reason)} 
-            );
-
-            // example 8 - Reject without waiting for work to complete
-            function doAsync8() { 
-                return Promise.reject('reject called in promise....'); 
-            }
-            doAsync8().then( 
-                function (value) { console.log('Ok: ' + value) }, 
-                function (reason) { console.log('Nope: ' + reason)} 
-            );
-
             // example 9 - ALL promise all resolve
             let p9a = new Promise(function (resolve, reject) { 
                 console.log('in promise code'); 
