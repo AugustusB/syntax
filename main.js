@@ -143,4 +143,10 @@ myPromiseExamples.rejectWithCatch();
 var myPromiseMoreFeatureExamples = new PromiseMoreFeatureExamples('body #codeExamples');
 myPromiseMoreFeatureExamples.callAnotherPormise();
 myPromiseMoreFeatureExamples.noAsyncCallNeeded();
+myPromiseMoreFeatureExamples.promiseAll();
+myPromiseMoreFeatureExamples.pormiseAllSecondRejected();
+myPromiseMoreFeatureExamples.promiseAllBothRejected();
+myPromiseMoreFeatureExamples.raceBothResolve();
+myPromiseMoreFeatureExamples.raceRejectResolve();
+
 syn.arrays();

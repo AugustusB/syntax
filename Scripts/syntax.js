@@ -1456,47 +1456,6 @@
             $(DEFAULT).append(newLocal);
         },
         promises  = () => {
-            
-            
-            // example 9 - ALL promise all resolve
-            let p9a = new Promise(function (resolve, reject) { 
-                console.log('in promise code'); 
-                setTimeout(function () { 
-                    resolve('OK to go....'); 
-                }, 3000); 
-            });
-
-            let p9b = new Promise(function (resolve, reject) { 
-                console.log('in promise code'); 
-                setTimeout(function () { 
-                    resolve('OK too! yes go....'); 
-                }, 6000); 
-            }); 
-
-            Promise.all([p9a, p9b]).then( 
-                function (value) { console.log('ALL:Ok both promises done p9a, p9b afer 6 seconds...') }, 
-                function (reason) { console.log('ALL:Nope one of the promises (p9a, p9b) rejected...') } 
-            );
-
-             // example 10 - ALL promise 1st resloved afer 1sec then 2nd rejected after 7sec 
-             let p10a = new Promise(function (resolve, reject) { 
-                console.log('in promise code'); 
-                setTimeout(function () { 
-                    resolve('OK to go....'); 
-                }, 1000); 
-            });
-
-            let p10b = new Promise(function (resolve, reject) { 
-                console.log('in promise code'); 
-                setTimeout(function () { 
-                    reject('Nope! No go....'); 
-                }, 7000); 
-            }); 
-
-            Promise.all([p10a, p10b]).then( 
-                function (value) { console.log('ALL:Ok both promises done p10a, p10b afer 7 sec...') }, 
-                function (reason) { console.log('ALL:Nope one of the promises (p10a, p10b) rejected after 7sec...') } 
-            );
 
             // example 11 - ALL promise 1st rejected afer 7sec then 2nd rejected after 10sec 
             let p11a = new Promise(function (resolve, reject) { 
