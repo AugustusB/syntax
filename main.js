@@ -11,6 +11,7 @@ import GeneratorExamples from "./modules/generatorModule.js";
 import GeneratorYieldExamples from "./modules/generator/generatorYieldModule.js";
 import PromiseExamples from "./modules/promiseModule.js";
 import PromiseMoreFeatureExamples from "./modules/promise/promiseMoreFeaturesModule.js";
+import ArrayExtension from "./modules/ArrayModule.js";
 
 
 project.projectIDModules = 599
@@ -148,5 +149,12 @@ myPromiseMoreFeatureExamples.pormiseAllSecondRejected();
 myPromiseMoreFeatureExamples.promiseAllBothRejected();
 myPromiseMoreFeatureExamples.raceBothResolve();
 myPromiseMoreFeatureExamples.raceRejectResolve();
+// Arrays 
+var myArrayExtenstionExamples = new ArrayExtension('body #codeExamples');
+myArrayExtenstionExamples.compareWayToInitialse();
+myArrayExtenstionExamples.increaseAllItems(100);
+myArrayExtenstionExamples.increaseUsingThis(50);
+myArrayExtenstionExamples.fillWithSingleValue(900);
+myArrayExtenstionExamples.changeUsingIndex();
 
-syn.arrays();
+//syn.arrays();

@@ -9,17 +9,17 @@ ns1.NumberExtensions.prototype = function(){
         // Extensions Number.parseInt
         console.log(`Number.parseInt === parseInt: ${Number.parseInt === parseInt}`);
         console.log(`Number.parseFloat === parseFloat: ${Number.parseFloat === parseFloat}`);
-                const newLocal = `<section><h2>Number extensions </h2><h4> Example 1 </h4>  
-                <pre><code class="language-javascript">
-                // Extensions Number.parseInt
-                console.log(\`Number.parseInt === parseInt: \${Number.parseInt === parseInt}\`);
-                console.log(\`Number.parseFloat === parseFloat: \${Number.parseFloat === parseFloat}\`);
-                </code></pre>   
-                </section>
-                <aside class="text-info bg-light mb-3">
-                    <cite title="Results">Result - </cite>&#9632; Number.parseInt === parseInt :  ${Number.parseInt === parseInt}} &#9632;
-                    <br>&#9632; Number.parseFloat === parseFloat : ${Number.parseFloat === parseFloat} &#9632; 
-                </aside>`;
+        const newLocal = `<section><h2>Number extensions </h2><h4> Example 1 </h4>  
+        <pre><code class="language-javascript">
+        // Extensions Number.parseInt
+        console.log(\`Number.parseInt === parseInt: \${Number.parseInt === parseInt}\`);
+        console.log(\`Number.parseFloat === parseFloat: \${Number.parseFloat === parseFloat}\`);
+        </code></pre>   
+        </section>
+        <aside class="text-info bg-light mb-3">
+            <cite title="Results">Result - </cite>&#9632; Number.parseInt === parseInt :  ${Number.parseInt === parseInt}} &#9632;
+            <br>&#9632; Number.parseFloat === parseFloat : ${Number.parseFloat === parseFloat} &#9632; 
+        </aside>`;
         $(this.examplesCtl).append(newLocal);
     }, 
     numberExtensionsNan = function numberExtensionsNan(){
